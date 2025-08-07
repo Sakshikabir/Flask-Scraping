@@ -2,6 +2,5 @@ flask
 bs4
 pandas
 requests
-os 
 re
 matplotlib
