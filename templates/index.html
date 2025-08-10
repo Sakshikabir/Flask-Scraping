@@ -2,32 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | Book Scraper</title>
+    <title>Book Scraper</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #3075bb2a;
-            font-family: 'Segoe UI', sans-serif;
-            height: 100vh;
+            height: 100vh; /* Full height */
             display: flex;
-            justify-content: center;
             align-items: center;
-            flex-direction: column;
-            text-align: center;
-        }
-        .btn-lg {
-            font-size: 1.2rem;
-            padding: 12px 30px;
+            justify-content: center;
+            background-color: #f8f9fa;
         }
     </style>
 </head>
-<body>
+<body class="text-center">
 
-    <h1 class="mb-4">📘 Welcome to Book Scraper Project</h1>
-    <p class="mb-4 text-muted">Click the button below to scrape and view book data</p>
+    <div>
+        <h1 class="mb-4">📚 Welcome to Book Scraper</h1>
 
-    <!-- ✅ This button opens the scrape page -->
-    <a href="/scrape" class="btn btn-primary btn-lg">📖 Open Scraped Book Data</a>
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3">
+            <!-- Scrape Books Button -->
+            <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
+
+            <!-- Bar Chart Button -->
+            <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
+
+            <!-- Pie Chart Button -->
+            <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
+        </div>
+    </div>
 
 </body>
 </html>

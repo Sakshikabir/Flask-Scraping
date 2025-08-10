@@ -42,7 +42,7 @@ def scrape_books():
 
     return render_template("home.html", Table=scraped_data.to_html(index=False, classes="table table-striped"))
 
-# ✅ Bar chart route
+#✅ Bar chart route
 @app.route('/bar')
 def bar_chart():
     if scraped_data.empty:
@@ -61,7 +61,7 @@ def bar_chart():
 
     return render_template('bar_chart.html', chart_url=url_for('static', filename='chart.png'))
 
-# ✅ Pie chart route
+# # ✅ Pie chart route
 @app.route('/pie')
 def pie_chart():
     if scraped_data.empty:

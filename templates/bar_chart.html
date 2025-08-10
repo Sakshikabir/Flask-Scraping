@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bar Chart</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Book Prices - Bar Chart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body style="padding: 30px;">
-    <h2 class="mb-4">Book Prices - Bar Chart</h2>
+<body class="container mt-5">
+    <h1 class="mb-4">Book Prices - Bar Chart</h1>
 
-    <div>
-        <img src="{{ chart_url }}" alt="Bar Chart" class="img-fluid">
+    <div class="text-center">
+        <img src="{{ chart_url }}" alt="Book Prices Chart" class="img-fluid rounded shadow">
     </div>
 
-    <div class="mt-4">
-        <a href="/" class="btn btn-secondary">Back to Table</a>
+    <div class="mt-4 text-center">
+        <a href="{{ url_for('scrape_books') }}" class="btn btn-primary">Scrape Again</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Home</a>
     </div>
 </body>
 </html>
