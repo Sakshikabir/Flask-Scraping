@@ -3,5 +3,3 @@ bs4
 pandas
 requests
 matplotlib
-json
-time
