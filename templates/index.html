@@ -8,10 +8,15 @@
         body {
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             background: linear-gradient(135deg, #d1c4e9, #f8bbd0);
             font-family: 'Segoe UI', sans-serif;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .container-card {
             background: white;
@@ -38,6 +43,13 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        footer {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -46,16 +58,22 @@
 </head>
 <body>
 
-    <div class="container-card">
-        <h1>📚 Multi Web Scraper</h1>
-        <p>Scrape data, visualize it with charts, and explore insights — all in one place!</p>
+    <main>
+        <div class="container-card">
+            <h1>📚 Multi Web Scraper</h1>
+            <p>Scrape data, visualize it with charts, and explore insights — all in one place!</p>
 
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
-            <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
-            <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
+                <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
+                <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
+            </div>
         </div>
-    </div>
+    </main>
+
+    <footer>
+        Developed by <strong>Sakshi</strong> — Internship Trainee at <strong>Codroidhub</strong> 🖥️
+    </footer>
 
 </body>
 </html>
