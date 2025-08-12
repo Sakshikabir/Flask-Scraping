@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title>Multi Web Scraper</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --welcome-color: #13022b; /* Change this to update color */
+        }
         body {
             min-height: 100vh;
             display: flex;
@@ -12,11 +16,28 @@
             background: linear-gradient(135deg, #d1c4e9, #f8bbd0);
             font-family: 'Segoe UI', sans-serif;
         }
-        main {
-            flex: 1;
+        header {
+            padding: 15px 20px;
             display: flex;
+            justify-content: flex-end;
             align-items: center;
-            justify-content: center;
+        }
+        .social-links a {
+            margin-left: 15px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: #4a148c;
+        }
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+        .welcome-text {
+            font-weight: bold;
+            color: var(--welcome-color);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
         }
         .container-card {
             background: white;
@@ -25,6 +46,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            margin: auto;
         }
         h1 {
             font-weight: bold;
@@ -44,11 +66,12 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         footer {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 10px;
             text-align: center;
-            color: #555;
+            padding: 10px;
+            background: #f3e5f5;
+            margin-top: auto;
             font-size: 0.9rem;
+            color: #6a1b9a;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
@@ -58,21 +81,36 @@
 </head>
 <body>
 
-    <main>
-        <div class="container-card">
-            <h1>📚 Multi Web Scraper</h1>
-            <p>Scrape data, visualize it with charts, and explore insights — all in one place!</p>
-
-            <div class="d-flex justify-content-center gap-3">
-                <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
-                <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
-                <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
-            </div>
+    <!-- Header -->
+    <header>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
         </div>
-    </main>
+    </header>
 
+    <!-- Welcome Line -->
+    <div class="welcome-text">Welcome to my portfolio</div>
+
+    <!-- Main Container -->
+    <div class="container-card">
+        <h1>📚 Multi Web Scraper</h1>
+        <p>Scrape data, visualize it with charts, and explore insights — all in one place!</p>
+
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
+            <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
+            <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        Developed by <strong>Sakshi</strong> — Internship Trainee at <strong>Codroidhub</strong> 🖥️
+        Sakshi - Internship Trainee at CodroidHub Company
     </footer>
 
 </body>
