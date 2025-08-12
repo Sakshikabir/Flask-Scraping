@@ -1,56 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Scraped Book Data</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            background: linear-gradient(135deg, #f3e5f5, #fce4ec);
             font-family: 'Segoe UI', sans-serif;
         }
-        .card {
+        .container-card {
+            background: white;
+            padding: 30px;
             border-radius: 20px;
-            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+        .btn {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
         table {
-            background: white;
             border-radius: 10px;
             overflow: hidden;
         }
-        th {
-            background-color: #a3ccf8 !important;
+        thead {
+            background-color: #6a1b9a;
             color: white;
         }
-        .btn-lg {
-            min-width: 160px;
+        tbody tr:nth-child(even) {
+            background-color: #f9f5fc;
+        }
+        tbody tr:hover {
+            background-color: #f3e5f5;
         }
     </style>
 </head>
-<body class="container mt-5">
+<body>
 
-    <div class="card p-4">
-        <h1 class="mb-4 text-primary text-center">📄 Scraped Book Prices</h1>
+<div class="container">
+    <div class="container-card">
+        <h1 class="mb-4 text-center">📄 Scraped Books Data</h1>
 
-        <!-- Scraped Table -->
-        <div class="table-responsive">
-            {{ Table|safe }}
+        <div class="text-center mb-3">
+            <a href="/bar" class="btn btn-success me-2">📊 Show Bar Chart</a>
+            <a href="/pie" class="btn btn-warning">🥧 Show Pie Chart</a>
         </div>
 
-        <!-- Buttons -->
-        <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-            <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">
-                <i class="fas fa-chart-bar"></i> Bar Chart
-            </a>
-            <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg text-dark">
-                <i class="fas fa-chart-pie"></i> Pie Chart
-            </a>
-            <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg">
-                <i class="fas fa-home"></i> Home
-            </a>
+        <div class="table-responsive">
+            {{ Table | safe }}
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-secondary">⬅ Back to Home</a>
         </div>
     </div>
+</div>
 
 </body>
 </html>
