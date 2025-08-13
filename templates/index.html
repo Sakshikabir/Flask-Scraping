@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --welcome-color: #13022b; /* Change this to update color */
+            --welcome-color: #4a148c;
         }
         body {
             min-height: 100vh;
@@ -19,12 +19,17 @@
         header {
             padding: 15px 20px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
         }
+        .brand-name {
+            font-size: 1.3rem;
+            font-weight: normal;
+            color: #4a148c;
+        }
         .social-links a {
-            margin-left: 15px;
-            font-size: 1.2rem;
+            margin-left: 10px;
+            font-size: 1.1rem;
             text-decoration: none;
             color: #4a148c;
         }
@@ -34,10 +39,9 @@
         .welcome-text {
             font-weight: bold;
             color: var(--welcome-color);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             text-align: center;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
+            margin: 20px 0;
         }
         .container-card {
             background: white;
@@ -47,6 +51,7 @@
             text-align: center;
             animation: fadeIn 1s ease-in-out;
             margin: auto;
+            max-width: 700px;
         }
         h1 {
             font-weight: bold;
@@ -57,7 +62,7 @@
             margin-bottom: 30px;
         }
         .btn-lg {
-            min-width: 150px;
+            min-width: 180px;
             font-size: 1.2rem;
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -83,6 +88,7 @@
 
     <!-- Header -->
     <header>
+        <div class="brand-name">Sakshi Portfolio</div>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME" target="_blank">
                 <i class="fab fa-linkedin"></i> LinkedIn
@@ -93,7 +99,7 @@
         </div>
     </header>
 
-    <!-- Welcome Line -->
+    <!-- Welcome Line above container -->
     <div class="welcome-text">Welcome to my portfolio</div>
 
     <!-- Main Container -->
@@ -101,10 +107,13 @@
         <h1>📚 Multi Web Scraper</h1>
         <p>Scrape data, visualize it with charts, and explore insights — all in one place!</p>
 
-        <div class="d-flex justify-content-center gap-3">
-            <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">Scrape Books</a>
-            <a href="{{ url_for('bar_chart') }}" class="btn btn-success btn-lg">Bar Chart</a>
-            <a href="{{ url_for('pie_chart') }}" class="btn btn-warning btn-lg">Pie Chart</a>
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+            <a href="{{ url_for('scrape_books') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-book"></i> Scrape Books
+            </a>
+            <a href="{{ url_for('flipkart') }}" class="btn btn-info btn-lg">
+                <i class="fas fa-laptop"></i> Scrape Flipkart Laptops
+            </a>
         </div>
     </div>
 
@@ -115,3 +124,4 @@
 
 </body>
 </html>
+
