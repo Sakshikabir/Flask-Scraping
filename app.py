@@ -15,8 +15,12 @@ app.config['UPLOAD_FOLDER'] = 'static'
 BOOKS_CSV = 'books.csv'
 LAPTOPS_CSV = 'laptops.csv'
 
-# ✅ Home page
 @app.route('/')
+def intro():
+    return render_template('intro.html')
+
+# ✅ Home page
+@app.route('/index')
 def index():
     return render_template("index.html")
 
