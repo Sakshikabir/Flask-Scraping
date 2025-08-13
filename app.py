@@ -43,7 +43,7 @@ def scrape_books():
     df_books = pd.DataFrame(products, columns=["Name", "Price"])
     df_books.to_csv(BOOKS_CSV, index=False)
 
-    return render_template("home.html", Table=df_books.to_html(index=False, classes="table table-striped"))
+    return render_template("home.html", Table=df_books.to_html(index=False, classes="table table-striped"), data_type="books")
 
 # ✅ Bar chart for books
 @app.route('/bar')
@@ -124,7 +124,7 @@ def flipkart():
     df_laptops = pd.DataFrame(laptops, columns=["Name", "Price", "Rating"])
     df_laptops.to_csv(LAPTOPS_CSV, index=False)
 
-    return render_template("home.html", Table=df_laptops.to_html(index=False, classes="table table-striped"))
+    return render_template("home.html", Table=df_laptops.to_html(index=False, classes="table table-striped"),data_type="laptops")
 
 # ✅ Bar chart for laptops
 @app.route('/bar_laptop')
