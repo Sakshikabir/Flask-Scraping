@@ -15,6 +15,8 @@ app.config['UPLOAD_FOLDER'] = 'static'
 BOOKS_CSV = 'books.csv'
 LAPTOPS_CSV = 'laptops.csv'
 
+df_laptops = pd.DataFrame()
+
 @app.route('/')
 def intro():
     return render_template('intro.html')
@@ -63,12 +65,12 @@ def bar_chart():
     plt.title("Book Prices - Bar Chart")
 
     chart_name = f'chart_books_{int(time.time())}.png'
-    chart_path = os.path.join(app.config['UPLOAD_FOLDER'], chart_name)
+    chart_path = os.path.join(app.config['UPLOAD_FOLDER'], 'CHART.PNG')
     plt.tight_layout()
     plt.savefig(chart_path)
     plt.close()
 
-    return render_template('bar_chart.html', chart_url=url_for('static', filename=chart_name))
+    return render_template('bar_chart.html', chart_url=url_for('static', filename='CHART.PNG'))
 
 # ✅ Pie chart for books
 @app.route('/pie')
@@ -97,6 +99,7 @@ def pie_chart():
 # ✅ Flipkart laptop scraper 
 @app.route('/flipkart')
 def flipkart():
+    global df_laptops
     url = "https://www.flipkart.com/search?q=laptop&sid=6bo%2Cb5g&as=on&as-show=on"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"
@@ -126,7 +129,7 @@ def flipkart():
         laptops.append([title, Price, Rating])
 
     df_laptops = pd.DataFrame(laptops, columns=["Name", "Price", "Rating"])
-    df_laptops.to_csv(LAPTOPS_CSV, index=False)
+    # df_laptops.to_csv(LAPTOPS_CSV, index=False)
 
     return render_template("home.html", Table=df_laptops.to_html(index=False, classes="table table-striped"),data_type="laptops")
 
@@ -136,7 +139,7 @@ def bar_chart_laptop():
     if not os.path.exists(LAPTOPS_CSV):
         return redirect('/flipkart')
 
-    df_laptops = pd.read_csv(LAPTOPS_CSV)
+    # df_laptops = pd.read_csv(LAPTOPS_CSV)
     df_laptops["Price"] = pd.to_numeric(df_laptops["Price"], errors='coerce').fillna(0)
 
     plt.figure(figsize=(12, 6))
