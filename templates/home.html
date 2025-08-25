@@ -1,150 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Scraped Data</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #f3e5f5, #fce4ec);
-            font-family: 'Segoe UI', sans-serif;
-            padding-bottom: 30px;
-        }
-        .container-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            margin: 50px auto;
-            max-width: 1000px;
-            animation: fadeIn 0.6s ease-in-out;
-        }
-        h1 {
-            font-weight: bold;
-            color: #6a1b9a;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(-10px);}
-            to {opacity: 1; transform: translateY(0);}
-        }
-        /* Chart header and buttons */
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .section-title {
-            font-weight: bold;
-            font-size: 1.4rem;
-            color: #4a148c;
-        }
-        .chart-buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .chart-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 18px;
-            border-radius: 12px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.49);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .chart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.666);
-            text-decoration: none;
-        }
-        .btn-green { background-color: #55ac69; }
-        .btn-yellow { background-color: #e7a035; }
-        .btn-secondary-custom { background-color: #6c757d; }
+  <meta charset="UTF-8">
+  <title>CodroidHub - Summer Training</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Table styling to match index page */
-        table {
-            border-radius: 12px;
-            overflow: hidden;
-            font-size: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 100%;
-            border-collapse: collapse;
-        }
-        thead {
-            background: linear-gradient(90deg, #6a1b9a, #8e24aa);
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        }
-        thead th {
-            padding: 14px;
-            text-align: center;
-            border-bottom: 3px solid #4a148c;
-        }
-        tbody tr:nth-child(even) {
-            background-color: #f1f8e9;
-        }
-        tbody tr:hover {
-            background-color: #f3e5f5;
-            transition: background 0.2s ease-in-out;
-        }
-    </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    canvas#bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #00f0ff;
+      letter-spacing: 2px;
+    }
+    header nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    header nav a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    header nav a:hover {
+      color: #ff0080;
+    }
+
+    /* Hero Section (Portfolio style) */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      margin-bottom: 25px;
+      color: #00f0ff;
+      text-shadow: 0 0 18px rgba(0,240,255,0.7);
+    }
+    p.tagline {
+      font-size: 20px;
+      max-width: 650px;
+      margin-bottom: 50px;
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    /* Futuristic Explore Button */
+    .scroll-btn {
+      display: inline-block;
+      padding: 14px 34px;
+      background: linear-gradient(135deg, #00f0ff, #ff0080);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 0 18px rgba(0,240,255,0.6), 0 0 35px rgba(255,0,128,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .scroll-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 0 28px rgba(0,240,255,0.9), 0 0 55px rgba(255,0,128,0.7);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 18px;
+      font-size: 14px;
+      color: #aaa;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 { font-size: 30px; }
+      p.tagline { font-size: 16px; margin-bottom: 30px; }
+      header nav { gap: 12px; font-size: 14px; }
+    }
+  </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <canvas id="bg"></canvas>
 
-<div class="container">
-    <div class="container-card">
-        <h1 class="mb-4 text-center">📄 Scraped Data</h1>
+  <!-- Header -->
+  <header>
+    <div class="logo">Sakshi Kabir</div>
+    <nav>
+      <a href="/aboutMe">About Me</a>
+      <a href="/aboutCodroid" target="_blank">CodroidHub</a>
+      <a href="/explore">Explore</a>
+      <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
+      <a href="/blogs">Blogs</a>
+    </nav>
+  </header>
 
-        {% if data_type == "books" %}
-            <div class="chart-header">
-                <div class="section-title">📚 Books Charts</div>
-                <a href="{{ url_for('index') }}" class="chart-btn btn-secondary-custom">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </a>
-            </div>
-            <div class="chart-buttons">
-                <a href="{{ url_for('bar_chart') }}" class="chart-btn btn-green">
-                    <i class="fas fa-chart-bar"></i> Book Bar Chart
-                </a>
-                <a href="{{ url_for('pie_chart') }}" class="chart-btn btn-yellow">
-                    <i class="fas fa-chart-pie"></i> Book Pie Chart
-                </a>
-            </div>
-        {% elif data_type == "laptops" %}
-            <div class="chart-header">
-                <div class="section-title">💻 Laptops Charts</div>
-                <a href="{{ url_for('index') }}" class="chart-btn btn-secondary-custom">
-                    <i class="fas fa-arrow-left"></i> Back to Home
-                </a>
-            </div>
-            <div class="chart-buttons">
-                <a href="{{ url_for('bar_chart_laptop') }}" class="chart-btn btn-green">
-                    <i class="fas fa-chart-bar"></i> Laptop Bar Chart
-                </a>
-                <a href="{{ url_for('pie_chart_laptop') }}" class="chart-btn btn-yellow">
-                    <i class="fas fa-chart-pie"></i> Laptop Pie Chart
-                </a>
-            </div>
-        {% endif %}
+  <!-- Portfolio Style Hero -->
+  <main>
+    <h1>Job Oriented Training in Data Science</h1>
+    <p class="tagline">Hands-on learning with real-world projects, mentorship, and career guidance.  
+      Gain the skills to stand out in Data Science, Machine Learning, and AI.</p>
+    <a class="scroll-btn" href="/explore">Explore More</a>
+  </main>
 
-        <!-- Data Table -->
-        <div class="table-responsive mt-4">
-            {{ Table | safe }}
-        </div>
-    </div>
-</div>
+  <!-- Footer -->
+  <footer>
+    © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
+  </footer>
 
+  <!-- Background Animation Script -->
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const numParticles = 80;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.radius = 2;
+        this.vx = (Math.random() - 0.5) * 1;
+        this.vy = (Math.random() - 0.5) * 1;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fill();
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        this.draw();
+      }
+    }
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push(new Particle());
+    }
+
+    function connect() {
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+          let dx = particles[a].x - particles[b].x;
+          let dy = particles[a].y - particles[b].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 120) {
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => p.update());
+      connect();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>

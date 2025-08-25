@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📚 Book Prices - CodroidHub</title>
+  <meta charset="UTF-8">
+  <title>About Me - Sakshi Kabir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
@@ -14,9 +14,6 @@
       font-family: 'Rajdhani', sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       overflow-x: hidden;
     }
 
@@ -30,12 +27,12 @@
 
     /* Header */
     header {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
-      padding: 18px 40px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
@@ -43,7 +40,7 @@
     }
     header .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: #00f0ff;
       letter-spacing: 2px;
@@ -51,7 +48,6 @@
     header nav {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
     }
     header nav a {
       color: #eee;
@@ -61,133 +57,64 @@
     }
     header nav a:hover {
       color: #ff0080;
-      text-shadow: 0 0 8px #ff0080;
     }
 
-    /* Container */
-    .container {
-      max-width: 1100px;
+    /* Main Content */
+    main {
+      max-width: 900px;
       margin: 60px auto;
-      padding: 30px 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,240,255,0.4);
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,240,255,0.2);
-      backdrop-filter: blur(10px);
-    }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-    .back-button {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: transform 0.2s ease;
-    }
-    .back-button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
-    }
-
-    .header h2 {
-      margin: 0;
-      font-size: 28px;
-      color: #00f0ff;
-      text-shadow: 0 0 10px rgba(0,240,255,0.8);
-      flex: 1;
-    }
-
-    /* Table */
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 15px;
-      margin-top: 20px;
-      color: #eee;
-    }
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    th {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      text-shadow: 0 0 6px rgba(0,0,0,0.6);
-    }
-    tr:hover {
-      background: rgba(0,240,255,0.1);
-    }
-
-    /* Buttons */
-    .button-group {
-      margin-top: 40px;
+      padding: 30px;
       text-align: center;
     }
-    .button {
-      display: inline-block;
-      margin: 10px 15px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: 0.3s;
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00f0ff;
+      font-size: 38px;
+      margin-bottom: 40px;
+      text-shadow: 0 0 8px rgba(0,240,255,0.6);
     }
-    .button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
+
+    .about-container {
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      line-height: 1.7;
+      font-size: 17px;
+      color: #ddd;
+      transition: transform 0.3s ease;
+    }
+    .about-container:hover {
+      transform: translateY(-6px);
+    }
+    .about-container img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      box-shadow: 0 0 18px rgba(0,240,255,0.6);
+      border: 3px solid #00f0ff;
+    }
+    .about-container h2 {
+      color: #ff80df;
+      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .about-container p {
+      margin-bottom: 18px;
     }
 
     /* Footer */
     footer {
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
       padding: 18px;
       font-size: 14px;
       color: #aaa;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    footer span { color: #00f0ff; }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header { flex-direction: column; align-items: flex-start; }
-      table, thead, tbody, th, td, tr { display: block; }
-      thead tr { display: none; }
-      td {
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      td::before {
-        position: absolute;
-        top: 12px;
-        left: 15px;
-        width: 45%;
-        white-space: nowrap;
-        content: attr(data-label);
-        font-weight: 600;
-        color: #00f0ff;
-      }
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 50px;
     }
   </style>
 </head>
@@ -200,33 +127,39 @@
     <div class="logo">Sakshi Kabir</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/explore">Explore</a>
       <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid" target="_blank">CodroidHub</a>
+      <a href="/aboutCodroid">CodroidHub</a>
       <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
       <a href="/blogs">Blogs</a>
     </nav>
   </header>
 
-  <!-- Main -->
-  <main class="container">
-    <div class="header">
-      <a href="/" class="back-button" aria-label="Back to Home">🔙 Back</a>
-      <h2>📚 Scraped Book Prices</h2>
-    </div>
-
-    {{ table | safe }}
-
-    <div class="button-group">
-      <a href="/bar" class="button" aria-label="Bar Chart">📊 Bar Chart</a>
-      <a href="/pie" class="button" aria-label="Pie Chart">🥧 Pie Chart</a>
+  <!-- About Section -->
+  <main>
+    <h1>About Me</h1>
+    <div class="about-container">
+      <!-- Your Own Image -->
+      <img src="{{ url_for('static', filename='IMG-20250717-WA0002.jpg') }}" alt="Profile Picture">
+      
+      <h2>Hello, I'm Sakshi Kabir 👋</h2>
+      <p>
+        I am passionate about <strong>Data Science, Machine Learning</strong>.  
+        My journey revolves around solving real-world problems using data-driven insights and modern technologies.  
+      </p>
+      <p>
+        Currently exploring <strong>Web Scraping, Power BI, and AI/ML</strong> to build innovative solutions.  
+        I love creating visually appealing dashboards, automating tasks, and turning data into impactful stories.
+      </p>
+      <p>
+        Beyond coding, I enjoy <strong>sharing knowledge</strong> through blogs and collaborating on exciting projects that make a difference.
+      </p>
     </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    © 2025 <span>CodroidHub</span> | Built with ❤️ by Sakshi Kabir
+    © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
   </footer>
 
   <!-- Background Animation Script -->
@@ -256,6 +189,7 @@
       update() {
         this.x += this.vx;
         this.y += this.vy;
+
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
         this.draw();
@@ -272,6 +206,7 @@
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
           let distance = Math.sqrt(dx * dx + dy * dy);
+
           if (distance < 120) {
             ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
             ctx.lineWidth = 1;
@@ -290,6 +225,7 @@
       connect();
       requestAnimationFrame(animate);
     }
+
     animate();
 
     window.addEventListener('resize', () => {

@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Power BI Dashboards - CodroidHub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📚 Book Prices - CodroidHub</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Futuristic Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +30,8 @@
 
     /* Header */
     header {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
       padding: 18px 40px;
       display: flex;
       justify-content: space-between;
@@ -64,130 +64,86 @@
       text-shadow: 0 0 8px #ff0080;
     }
 
-    /* Container */
-    .container {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 30px 20px;
+    /* Main */
+    main {
+      flex: 1;
+      max-width: 1150px;
+      margin: 50px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 38px;
+      font-family: 'Orbitron', sans-serif;
+      color: #00f0ff;
+      margin-bottom: 50px;
+      text-shadow: 0 0 15px rgba(0,240,255,0.8);
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(0,240,255,0.4);
       border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,240,255,0.2);
-      backdrop-filter: blur(10px);
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,240,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
+    .card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: 0 0 25px rgba(0,240,255,0.6), 0 0 35px rgba(255,0,128,0.4);
     }
-    .back-button {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: transform 0.2s ease;
-    }
-    .back-button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
-    }
-
-    .header h2 {
-      margin: 0;
-      font-size: 28px;
+    .card h2 {
       color: #00f0ff;
-      text-shadow: 0 0 10px rgba(0,240,255,0.8);
-      flex: 1;
+      margin-bottom: 12px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      text-shadow: 0 0 6px rgba(0,240,255,0.6);
     }
-
-    /* Table */
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 15px;
-      margin-top: 20px;
-      color: #eee;
-    }
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    th {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      text-shadow: 0 0 6px rgba(0,0,0,0.6);
-    }
-    tr:hover {
-      background: rgba(0,240,255,0.1);
-    }
-
-    /* Buttons */
-    .button-group {
-      margin-top: 40px;
-      text-align: center;
+    .card p {
+      font-size: 14px;
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 20px;
     }
     .button {
-      display: inline-block;
-      margin: 10px 15px;
-      padding: 12px 24px;
       background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
+      color: #fff;
+      padding: 10px 22px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: 0.3s;
+      display: inline-block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(0,240,255,0.8), 0 0 30px rgba(255,0,128,0.7);
     }
 
     /* Footer */
     footer {
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       backdrop-filter: blur(6px);
       padding: 18px;
       font-size: 14px;
       color: #aaa;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
-    footer span { color: #00f0ff; }
+    footer span {
+      color: #00f0ff;
+    }
 
     /* Responsive */
     @media (max-width: 600px) {
-      .header { flex-direction: column; align-items: flex-start; }
-      table, thead, tbody, th, td, tr { display: block; }
-      thead tr { display: none; }
-      td {
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      td::before {
-        position: absolute;
-        top: 12px;
-        left: 15px;
-        width: 45%;
-        white-space: nowrap;
-        content: attr(data-label);
-        font-weight: 600;
-        color: #00f0ff;
-      }
+      h1 { font-size: 28px; }
+      header nav { gap: 12px; font-size: 14px; }
     }
   </style>
 </head>
@@ -195,12 +151,10 @@
   <!-- Animated Background -->
   <canvas id="bg"></canvas>
 
-  <!-- Header -->
   <header>
-    <div class="logo">Sakshi Kabir</div>
+    <div class="logo">CodroidHub</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/explore">Explore</a>
       <a href="/aboutMe">About Me</a>
       <a href="/aboutCodroid" target="_blank">CodroidHub</a>
       <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
@@ -209,27 +163,47 @@
     </nav>
   </header>
 
-  <!-- Main -->
-  <main class="container">
-    <div class="header">
-      <a href="/" class="back-button" aria-label="Back to Home">🔙 Back</a>
-      <h2>📚 Scraped Book Prices</h2>
-    </div>
-
-    {{ table | safe }}
-
-    <div class="button-group">
-      <a href="/bar" class="button" aria-label="Bar Chart">📊 Bar Chart</a>
-      <a href="/pie" class="button" aria-label="Pie Chart">🥧 Pie Chart</a>
+  <main>
+    <h1>🚀 Interactive Dashboards</h1>
+    <div class="cards">
+      <div class="card">
+        <h2>Sample Superstore</h2>
+        <p>Retail sales data including orders, profit, category, and region for business analysis and KPIs.</p>
+        <a class="button" href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final" target="_blank">Read More</a>
+      </div>
+      <div class="card">
+        <h2>HR & Sales Analytics</h2>
+        <p>Employee and sales performance data for tracking productivity, revenue, and workforce trends.</p>
+        <a class="button" href="/report/HR">Read More</a>
+      </div>
+      <div class="card">
+        <h2>Data Professional Survey</h2>
+        <p>Survey results with insights into salaries, skills, job satisfaction, and programming preferences.</p>
+        <a class="button" href="https://www.kaggle.com/datasets/muhammadkhalid/2023-data-professionals-survey" target="_blank">Read More</a>
+      </div>
+      <div class="card">
+        <h2>Financial Sample Data</h2>
+        <p>Business financials including revenue, expenses, and profit margins for fiscal reporting and forecasting.</p>
+        <a class="button" href="https://www.kaggle.com/datasets/nikhil7280/financial-dataset" target="_blank">Read More</a>
+      </div>
+      <div class="card">
+        <h2>E-commerce Sales Data</h2>
+        <p>Online retail transaction data including customer behavior, products, and purchase patterns.</p>
+        <a class="button" href="https://www.kaggle.com/datasets/carrie1/ecommerce-data" target="_blank">Read More</a>
+      </div>
+      <div class="card">
+        <h2>Global Energy Consumption</h2>
+        <p>Energy production and consumption by country, fuel type, and year for sustainability analysis.</p>
+        <a class="button" href="https://www.kaggle.com/datasets/pralabhpoudel/world-energy-consumption" target="_blank">Read More</a>
+      </div>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
-    © 2025 <span>CodroidHub</span> | Built with ❤️ by Sakshi Kabir
+    © 2025 <span>CodroidHub</span> | Futuristic Dashboards ✨
   </footer>
 
-  <!-- Background Animation Script -->
+  <!-- Background Animation -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
@@ -237,7 +211,7 @@
     canvas.height = window.innerHeight;
 
     let particles = [];
-    const numParticles = 80;
+    const numParticles = 70;
 
     class Particle {
       constructor() {

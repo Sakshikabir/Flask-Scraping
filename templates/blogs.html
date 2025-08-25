@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>Blogs - Sakshi Kabir</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📚 Book Prices - CodroidHub</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Futuristic Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,8 +30,8 @@
 
     /* Header */
     header {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
       padding: 18px 40px;
       display: flex;
       justify-content: space-between;
@@ -64,94 +64,72 @@
       text-shadow: 0 0 8px #ff0080;
     }
 
-    /* Container */
-    .container {
-      max-width: 1100px;
-      margin: 60px auto;
-      padding: 30px 20px;
+    /* Main */
+    main {
+      flex: 1;
+      max-width: 1150px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #00f0ff;
+      font-size: 36px;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 15px rgba(0,240,255,0.7);
+    }
+
+    /* Blog Cards */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    .card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(0,240,255,0.4);
       border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,240,255,0.2);
-      backdrop-filter: blur(10px);
+      padding: 25px 20px;
+      box-shadow: 0 0 15px rgba(0,240,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
+    .card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 0 25px rgba(0,240,255,0.5), 0 0 35px rgba(255,0,128,0.4);
     }
-    .back-button {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: transform 0.2s ease;
-    }
-    .back-button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
-    }
-
-    .header h2 {
-      margin: 0;
-      font-size: 28px;
+    .card h2 {
       color: #00f0ff;
-      text-shadow: 0 0 10px rgba(0,240,255,0.8);
-      flex: 1;
+      margin-bottom: 15px;
+      font-size: 20px;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 6px rgba(0,240,255,0.6);
     }
-
-    /* Table */
-    table {
-      border-collapse: collapse;
-      width: 100%;
+    .card p {
       font-size: 15px;
-      margin-top: 20px;
-      color: #eee;
+      line-height: 1.5;
+      color: #ccc;
+      margin-bottom: 25px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    th {
+    .card button {
+      align-self: flex-start;
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      text-shadow: 0 0 6px rgba(0,0,0,0.6);
-    }
-    tr:hover {
-      background: rgba(0,240,255,0.1);
-    }
-
-    /* Buttons */
-    .button-group {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .button {
-      display: inline-block;
-      margin: 10px 15px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
+      border: none;
+      padding: 10px 22px;
       border-radius: 8px;
-      text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
+      cursor: pointer;
       box-shadow: 0 0 12px rgba(0,240,255,0.5);
       transition: 0.3s;
     }
-    .button:hover {
-      transform: translateY(-2px) scale(1.05);
+    .card button:hover {
+      transform: scale(1.08);
       box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
     }
 
@@ -165,29 +143,14 @@
       color: #aaa;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    footer span { color: #00f0ff; }
+    footer span {
+      color: #00f0ff;
+    }
 
     /* Responsive */
     @media (max-width: 600px) {
-      .header { flex-direction: column; align-items: flex-start; }
-      table, thead, tbody, th, td, tr { display: block; }
-      thead tr { display: none; }
-      td {
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      td::before {
-        position: absolute;
-        top: 12px;
-        left: 15px;
-        width: 45%;
-        white-space: nowrap;
-        content: attr(data-label);
-        font-weight: 600;
-        color: #00f0ff;
-      }
+      h1 { font-size: 26px; }
+      header nav { gap: 12px; font-size: 14px; }
     }
   </style>
 </head>
@@ -210,26 +173,48 @@
   </header>
 
   <!-- Main -->
-  <main class="container">
-    <div class="header">
-      <a href="/" class="back-button" aria-label="Back to Home">🔙 Back</a>
-      <h2>📚 Scraped Book Prices</h2>
-    </div>
-
-    {{ table | safe }}
-
-    <div class="button-group">
-      <a href="/bar" class="button" aria-label="Bar Chart">📊 Bar Chart</a>
-      <a href="/pie" class="button" aria-label="Pie Chart">🥧 Pie Chart</a>
+  <main>
+    <h1>✨ Latest Blogs</h1>
+    <div class="cards-container">
+      <div class="card">
+        <h2>Introduction to Web Scraping</h2>
+        <p>Discover the basics of web scraping, how it works, and the tools you'll need to start extracting data from websites efficiently and ethically...</p>
+        <button onclick="window.location.href='https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd2'">Read More</button>
+      </div>
+      <div class="card">
+        <h2>Getting Started with Data Science</h2>
+        <p>Data science combines statistics, programming, and domain expertise. Learn how to begin your journey and the essential skills required...</p>
+        <button onclick="alert('Read more about Getting Started with Data Science')">Read More</button>
+      </div>
+      <div class="card">
+        <h2>Power BI for Beginners</h2>
+        <p>Power BI is a powerful business analytics tool. Understand its core features and how to create interactive reports that can drive data-driven decisions...</p>
+        <button onclick="alert('Read more about Power BI for Beginners')">Read More</button>
+      </div>
+      <div class="card">
+        <h2>Python Libraries for AI & ML</h2>
+        <p>Explore the most popular Python libraries used in AI and machine learning, including TensorFlow, PyTorch, and Scikit-learn...</p>
+        <button onclick="alert('Read more about Python Libraries for AI & ML')">Read More</button>
+      </div>
+      <div class="card">
+        <h2>Effective Data Visualization Techniques</h2>
+        <p>Learn how to visualize data effectively using charts, dashboards, and interactive tools to convey insights clearly...</p>
+        <button onclick="alert('Read more about Effective Data Visualization Techniques')">Read More</button>
+      </div>
+      <div class="card">
+        <h2>Building Scalable Web Scrapers</h2>
+        <p>Understand how to design web scrapers that can handle large-scale data extraction tasks while managing errors, proxies, and rate limits gracefully...</p>
+        <button onclick="alert('Read more about Building Scalable Web Scrapers')">Read More</button>
+      </div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    © 2025 <span>CodroidHub</span> | Built with ❤️ by Sakshi Kabir
+    © 2025 <span>Data Analytics Trainee</span> | Built with ❤️ by Sakshi Kabir
   </footer>
 
-  <!-- Background Animation Script -->
+  <!-- Background Animation -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
@@ -237,7 +222,7 @@
     canvas.height = window.innerHeight;
 
     let particles = [];
-    const numParticles = 80;
+    const numParticles = 70;
 
     class Particle {
       constructor() {

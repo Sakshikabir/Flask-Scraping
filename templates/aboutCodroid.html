@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📚 Book Prices - CodroidHub</title>
+  <title>About CodroidHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
@@ -14,9 +14,6 @@
       font-family: 'Rajdhani', sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e0e0e0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       overflow-x: hidden;
     }
 
@@ -28,14 +25,13 @@
       z-index: -1;
     }
 
-    /* Header */
     header {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
-      padding: 18px 40px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
@@ -43,7 +39,7 @@
     }
     header .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: #00f0ff;
       letter-spacing: 2px;
@@ -51,7 +47,6 @@
     header nav {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
     }
     header nav a {
       color: #eee;
@@ -61,133 +56,86 @@
     }
     header nav a:hover {
       color: #ff0080;
-      text-shadow: 0 0 8px #ff0080;
     }
 
-    /* Container */
-    .container {
+    main {
       max-width: 1100px;
       margin: 60px auto;
-      padding: 30px 20px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,240,255,0.4);
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(0,240,255,0.2);
-      backdrop-filter: blur(10px);
+      padding: 30px;
     }
 
-    .header {
+    h1, h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00f0ff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 8px rgba(0,240,255,0.6);
+    }
+    p {
+      line-height: 1.7;
+      font-size: 17px;
+      margin-bottom: 20px;
+    }
+
+    /* Cards / Sections */
+    .section-box {
+      background: rgba(255,255,255,0.05);
+      padding: 25px 30px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .section-box:hover {
+      transform: translateY(-6px);
+    }
+
+    /* Social links */
+    .social-links {
+      display: flex;
+      gap: 25px;
+      margin: 25px 0;
+    }
+    .social-links a {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-    .back-button {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: transform 0.2s ease;
-    }
-    .back-button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
-    }
-
-    .header h2 {
-      margin: 0;
-      font-size: 28px;
+      gap: 10px;
       color: #00f0ff;
-      text-shadow: 0 0 10px rgba(0,240,255,0.8);
-      flex: 1;
-    }
-
-    /* Table */
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 15px;
-      margin-top: 20px;
-      color: #eee;
-    }
-    th, td {
-      padding: 12px 15px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    th {
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      text-shadow: 0 0 6px rgba(0,0,0,0.6);
-    }
-    tr:hover {
-      background: rgba(0,240,255,0.1);
-    }
-
-    /* Buttons */
-    .button-group {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .button {
-      display: inline-block;
-      margin: 10px 15px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
-      box-shadow: 0 0 12px rgba(0,240,255,0.5);
+      text-decoration: none;
       transition: 0.3s;
     }
-    .button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
+    .social-links a:hover {
+      color: #ff0080;
+    }
+    .social-links img {
+      width: 26px;
+      height: 26px;
     }
 
-    /* Footer */
+    /* Feedback */
+    .feedback-card {
+      background: rgba(0, 240, 255, 0.08);
+      border-left: 4px solid #00f0ff;
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      color: #e0f7ff;
+    }
+    .feedback-card .student-name {
+      font-weight: 600;
+      color: #ff80df;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
     footer {
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
       padding: 18px;
       font-size: 14px;
       color: #aaa;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    footer span { color: #00f0ff; }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .header { flex-direction: column; align-items: flex-start; }
-      table, thead, tbody, th, td, tr { display: block; }
-      thead tr { display: none; }
-      td {
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      td::before {
-        position: absolute;
-        top: 12px;
-        left: 15px;
-        width: 45%;
-        white-space: nowrap;
-        content: attr(data-label);
-        font-weight: 600;
-        color: #00f0ff;
-      }
+      background: rgba(0, 0, 0, 0.6);
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
   </style>
 </head>
@@ -197,36 +145,51 @@
 
   <!-- Header -->
   <header>
-    <div class="logo">Sakshi Kabir</div>
+    <div class="logo">CodroidHub</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/explore">Explore</a>
       <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid" target="_blank">CodroidHub</a>
+      <a href="/aboutCodroid">CodroidHub</a>
       <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
       <a href="/blogs">Blogs</a>
     </nav>
   </header>
 
-  <!-- Main -->
-  <main class="container">
-    <div class="header">
-      <a href="/" class="back-button" aria-label="Back to Home">🔙 Back</a>
-      <h2>📚 Scraped Book Prices</h2>
+  <!-- Main Content -->
+  <main>
+    <h1>About CodroidHub</h1>
+    <div class="section-box">
+      <p>
+        CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
+        software development, data science, and emerging technologies. Our mission is to bridge the gap
+        between theory and real-world application through hands-on training, projects, and mentorship.
+      </p>
+      <p>
+        We believe in nurturing curiosity and creativity, enabling students to confidently solve problems
+        and contribute meaningfully in their careers. With expert mentors and a supportive community,
+        CodroidHub is your launchpad for tech success.
+      </p>
     </div>
 
-    {{ table | safe }}
+    <h2>Connect with Us</h2>
+    <div class="social-links">
+      <a href="https://codroidhub.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/841/841364.png" alt=""> Website</a>
+      <a href="https://github.com/CodroidHub" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt=""> GitHub</a>
+      <a href="https://www.linkedin.com/company/codroidhub" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt=""> LinkedIn</a>
+      <a href="#blogs"><img src="https://cdn-icons-png.flaticon.com/512/1355/1355443.png" alt=""> Blogs</a>
+    </div>
 
-    <div class="button-group">
-      <a href="/bar" class="button" aria-label="Bar Chart">📊 Bar Chart</a>
-      <a href="/pie" class="button" aria-label="Pie Chart">🥧 Pie Chart</a>
+    <h2>What Students Say</h2>
+    <div class="feedback-card">
+      <p>"The training at CodroidHub helped me transition from a beginner to a confident developer. The mentors are amazing!"</p>
+      <div class="student-name">— Sakshi, Data Analytics Traineer</div>
     </div>
   </main>
 
   <!-- Footer -->
   <footer>
-    © 2025 <span>CodroidHub</span> | Built with ❤️ by Sakshi Kabir
+    © 2025 CodroidHub | Built with ❤️ by Sakshi Kabir
   </footer>
 
   <!-- Background Animation Script -->
@@ -256,6 +219,7 @@
       update() {
         this.x += this.vx;
         this.y += this.vy;
+
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
         this.draw();
@@ -272,6 +236,7 @@
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
           let distance = Math.sqrt(dx * dx + dy * dy);
+
           if (distance < 120) {
             ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
             ctx.lineWidth = 1;
@@ -290,6 +255,7 @@
       connect();
       requestAnimationFrame(animate);
     }
+
     animate();
 
     window.addEventListener('resize', () => {
