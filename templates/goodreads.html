@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 Goodreads Quotes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: white;
+      text-align: center;
+    }
+
+    /* Fixed Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px 20px;
+      box-shadow: 0 0 20px cyan;
+      z-index: 1000;
+    }
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.3rem;
+      color: cyan;
+      margin: 0 0 12px 0;
+      text-shadow: 0 0 15px cyan;
+    }
+
+    /* Buttons inside header */
+    .button-container {
+      margin-top: 5px;
+    }
+    .button-container a {
+      text-decoration: none;
+      background: cyan;
+      color: black;
+      padding: 10px 18px;
+      margin: 6px;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 0 12px cyan;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .button-container a:hover {
+      background: black;
+      color: cyan;
+      box-shadow: 0 0 20px cyan;
+    }
+
+    /* Page content (gap for fixed header) */
+    .content {
+      margin-top: 140px; /* leave space for header + buttons */
+      padding: 20px;
+    }
+
+    /* Table Container */
+    .table-container {
+      margin: 20px auto;
+      width: 95%;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,240,255,0.4);
+    }
+
+    /* Styled Table */
+    table.styled-table {
+      border-collapse: collapse;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    table.styled-table th, 
+    table.styled-table td {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 0.95rem;
+      color: #e0e0e0;
+    }
+    table.styled-table th {
+      background: rgba(0,240,255,0.15);
+      color: #00f0ff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    table.styled-table tr:nth-child(even) {
+      background: rgba(255,255,255,0.04);
+    }
+    table.styled-table tr:hover {
+      background: rgba(0,240,255,0.08);
+      transition: 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 Goodreads Quotes</h1>
+    <div class="button-container">
+      <a href="/scrape_goodreads">🔄 Refresh Quotes</a>
+      <a href="/goodreads_bar">📊 Bar Chart</a>
+      <a href="/goodreads_pie">🥧 Pie Chart</a>
+      <a href="/scraping">🏠 Back</a>
+    </div>
+  </header>
+
+  <div class="content">
+    <div class="table-container">
+      {{ data|safe }}
+    </div>
+  </div>
+</body>
+</html>

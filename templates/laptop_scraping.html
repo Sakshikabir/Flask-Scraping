@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>📚 Book Prices - Book Scraper</title>
+  <title>💻 Laptop Prices - Flipkart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
@@ -105,16 +105,35 @@
 </head>
 <body>
   <header>
-    <h1>📚 Scraped Book Prices  </h1>
+    <h1>💻 Laptop Prices - Flipkart</h1>
     <div class="btn-container">
       <a href="/scraping" class="btn">🏠 Back</a>
-      <a href="/pie" class="btn">🥧 View Pie Chart</a>
-      <a href="/bar" class="btn">📊 View Bar Chart</a>
+      <a href="/pie_flipkart" class="btn">🥧 View Pie Chart</a>
+      <a href="/bar_flipkart" class="btn">📊 View Bar Chart</a>
     </div>
   </header>
 
   <main class="table-container">
-    {{ table | safe }}
+    <table>
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>Name</th>
+          <th>Price (₹)</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for laptop in laptops %}
+        <tr>
+          <td>{{ laptop["Brand"] }}</td>
+          <td>{{ laptop["Name"] }}</td>
+          <td>{{ laptop["Price (₹)"] }}</td>
+          <td>{{ laptop["Rating"] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </main>
 
   <footer>

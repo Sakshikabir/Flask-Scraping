@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Web Scraping - Sakshi Kabir</title>
+  <title>🌐 Web Scraping - Sakshi Kabir</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Rajdhani', sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e0e0e0;
+      overflow-x: hidden;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
     /* Animated Background */
@@ -30,12 +30,12 @@
 
     /* Header */
     header {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(6px);
-      padding: 18px 40px;
+      padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
@@ -43,7 +43,7 @@
     }
     header .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: #00f0ff;
       letter-spacing: 2px;
@@ -51,7 +51,6 @@
     header nav {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
     }
     header nav a {
       color: #eee;
@@ -61,118 +60,125 @@
     }
     header nav a:hover {
       color: #ff0080;
-      text-shadow: 0 0 8px #ff0080;
     }
 
     /* Main */
     main {
       flex: 1;
-      padding: 70px 20px;
       max-width: 1150px;
-      margin: 0 auto;
+      margin: 60px auto;
+      padding: 30px;
       text-align: center;
     }
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 42px;
+      font-size: 38px;
       margin-bottom: 50px;
       color: #00f0ff;
-      text-shadow: 0 0 14px rgba(0,240,255,0.8);
+      text-shadow: 0 0 8px rgba(0,240,255,0.6);
     }
 
     /* Cards */
     .cards-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 30px;
+      width: 100%;
+      justify-items: center;
     }
+
+    @media (max-width: 1024px) {
+      .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,240,255,0.4);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 35px 25px;
       border-radius: 16px;
-      padding: 30px 25px;
-      box-shadow: 0 0 20px rgba(0,240,255,0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+      max-width: 300px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
     }
+
     .card:hover {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 0 25px rgba(0,240,255,0.6), 0 0 35px rgba(255,0,128,0.5);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,240,255,0.6);
     }
+
     .card img {
       width: 90px;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 0 8px rgba(0,240,255,0.6));
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 10px rgba(0,240,255,0.7));
       transition: transform 0.3s ease;
     }
     .card:hover img { transform: scale(1.1); }
-    .card h2 {
-      font-family: 'Orbitron', sans-serif;
+
+    .card h3 {
       font-size: 22px;
       margin-bottom: 15px;
       color: #00f0ff;
-      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+      font-family: 'Orbitron', sans-serif;
     }
+
     .card p {
       font-size: 15px;
-      color: #ccc;
-      margin-bottom: 20px;
+      color: #ddd;
+      margin-bottom: 22px;
       line-height: 1.6;
     }
+
     .card a {
       text-decoration: none;
       color: #fff;
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       padding: 10px 20px;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 600;
-      transition: 0.3s;
       display: inline-block;
-      box-shadow: 0 0 14px rgba(0,240,255,0.5);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .card a:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 22px rgba(0,240,255,0.9), 0 0 32px rgba(255,0,128,0.7);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(0,240,255,0.6);
     }
 
-    /* Scroll Button */
-    .scroll-down {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 0 14px rgba(0,240,255,0.6);
-      animation: bounce 1.5s infinite;
-      z-index: 1000;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .scroll-down:hover {
-      box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 28px rgba(255,0,128,0.7);
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+    .card:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Footer */
     footer {
       text-align: center;
       background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(10px);
       padding: 20px;
       font-size: 14px;
       color: #aaa;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    footer span {
-      color: #00f0ff;
     }
 
     /* Responsive */
@@ -191,64 +197,65 @@
     <div class="logo">Sakshi Kabir</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/explore">Explore</a>
       <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid" target="_blank">CodroidHub</a>
+      <a href="/aboutCodroid">CodroidHub</a>
       <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
       <a href="/blogs">Blogs</a>
     </nav>
   </header>
 
-  <!-- Main -->
+  <!-- Scraping Cards -->
   <main>
-    <h1>Web Scraping Topics</h1>
+    <h1>Web Scraping Projects</h1>
     <div class="cards-container">
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="BeautifulSoup Icon" />
-        <h2>BeautifulSoup</h2>
-        <p>Learn how to parse HTML and XML documents using Python’s BeautifulSoup library.</p>
+        <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Books Icon">
+        <h3>Book Scraper</h3>
+        <p>Learn how to parse book details using Python’s BeautifulSoup library.</p>
         <a href="/scrape">Learn More</a>
       </div>
+
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="Scrapy Icon" />
-        <h2>Scrapy Framework</h2>
-        <p>Master the Scrapy framework for scalable and fast web crawling and scraping.</p>
-        <a href="#">Learn More</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="Laptop Icon" />
+        <h3>Laptop Scraper</h3>
+        <p>Scrape Flipkart laptop details with Scrapy framework for structured crawling.</p>
+        <a href="/scrape_flipkart">Learn More</a>
       </div>
+
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968672.png" alt="Requests Icon" />
-        <h2>Requests Library</h2>
-        <p>Understand how to send HTTP requests and handle responses with Python Requests.</p>
-        <a href="#">Learn More</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/1998/1998592.png" alt="Quotes Icon">
+        <h3>Goodreads Quotes Scraper</h3>
+        <p>Scrape motivational quotes and analyze authors from Goodreads with Flask.</p>
+        <a href="/scrape_goodreads">Learn More</a>
       </div>
+
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1067/1067561.png" alt="Selenium Icon" />
-        <h2>Selenium</h2>
-        <p>Automate browsers and scrape dynamic content using Selenium WebDriver.</p>
-        <a href="#">Learn More</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Finance Icon" />
+        <h3>Yahoo Finance Scraper</h3>
+        <p>Scrape most active stock data from Yahoo Finance and visualize insights.</p>
+        <a href="/scrape_yahoo">Learn More</a>
       </div>
+
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920055.png" alt="XPath Icon" />
-        <h2>XPath Queries</h2>
-        <p>Extract data precisely from HTML/XML using XPath expressions.</p>
-        <a href="#">Learn More</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" alt="Weather Icon" />
+        <h3>Weather Scraper</h3>
+        <p>Scrape live weather updates and forecasts from popular weather websites.</p>
+        <a href="/scrape_weather">Learn More</a>
       </div>
+
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3194/3194979.png" alt="APIs Icon" />
-        <h2>APIs & JSON</h2>
-        <p>Learn how to interact with web APIs and process JSON data efficiently.</p>
-        <a href="#">Learn More</a>
+        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468327.png" alt="Movie Icon" />
+        <h3>Movie Scraper</h3>
+        <p>Scrape movie ratings, genres, and release dates from IMDb for analysis.</p>
+        <a href="/scrape_movies">Learn More</a>
       </div>
     </div>
   </main>
 
-  <!-- Scroll Button -->
-  <div class="scroll-down" onclick="window.scrollBy({top: window.innerHeight, behavior: 'smooth'});">&#8681;</div>
-
   <!-- Footer -->
   <footer>
-    © 2025 <span>CodroidHub</span> | Built with ❤️ by Sakshi Kabir
+    © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
   </footer>
 
   <!-- Background Animation Script -->
@@ -293,7 +300,7 @@
         for (let b = a; b < particles.length; b++) {
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
+          let distance = Math.sqrt(dx*dx + dy*dy);
           if (distance < 120) {
             ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
             ctx.lineWidth = 1;

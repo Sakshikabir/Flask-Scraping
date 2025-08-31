@@ -6,14 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
+    :root {
+      --primary-cyan: #00f0ff;
+      --secondary-pink: #ff0080;
+      --text-light: #e0e0e0;
+      --text-muted: #aaa;
+      --border: rgba(255,255,255,0.1);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Rajdhani', sans-serif;
+      font-family: "Rajdhani", sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #e0e0e0;
+      color: var(--text-light);
       overflow-x: hidden;
     }
 
@@ -25,23 +37,29 @@
       z-index: -1;
     }
 
+    h1,h2,h3 {
+      font-family: "Orbitron", sans-serif;
+      color: var(--primary-cyan);
+      text-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+
     header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
       padding: 20px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(6px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
     header .logo {
-      font-family: 'Orbitron', sans-serif;
+      font-family: "Orbitron", sans-serif;
       font-size: 24px;
       font-weight: 700;
-      color: #00f0ff;
+      color: var(--primary-cyan);
       letter-spacing: 2px;
     }
     header nav {
@@ -55,87 +73,87 @@
       transition: 0.3s;
     }
     header nav a:hover {
-      color: #ff0080;
+      color: var(--secondary-pink);
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 60px auto;
       padding: 30px;
+      display: flex;
+      gap: 2.5rem;
     }
 
-    h1, h2 {
-      font-family: 'Orbitron', sans-serif;
-      color: #00f0ff;
-      margin-bottom: 20px;
-      text-shadow: 0 0 8px rgba(0,240,255,0.6);
+    /* Left 50% */
+    .left-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    p {
-      line-height: 1.7;
-      font-size: 17px;
-      margin-bottom: 20px;
+    .left-box img {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 0 25px rgba(0,240,255,0.3);
+      transition: transform 0.4s ease;
     }
+    .left-box img:hover { transform: scale(1.03); }
 
-    /* Cards / Sections */
-    .section-box {
-      background: rgba(255,255,255,0.05);
-      padding: 25px 30px;
-      border-radius: 14px;
-      margin-bottom: 30px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
-    }
-    .section-box:hover {
-      transform: translateY(-6px);
-    }
-
-    /* Social links */
     .social-links {
       display: flex;
-      gap: 25px;
-      margin: 25px 0;
+      gap: 15px;
+      margin-top: 15px;
+      justify-content: center;
     }
-    .social-links a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #00f0ff;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.3s;
+    .social-links a img {
+      height: 28px;
+      filter: invert(1);
+      transition: transform 0.3s;
     }
-    .social-links a:hover {
-      color: #ff0080;
-    }
-    .social-links img {
-      width: 26px;
-      height: 26px;
-    }
+    .social-links a:hover img { transform: scale(1.2); }
 
-    /* Feedback */
-    .feedback-card {
-      background: rgba(0, 240, 255, 0.08);
-      border-left: 4px solid #00f0ff;
-      padding: 18px 22px;
-      border-radius: 10px;
-      margin-bottom: 18px;
-      color: #e0f7ff;
+    /* Right 50% */
+    .right-content {
+      flex: 1;
     }
-    .feedback-card .student-name {
+    .right-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
       font-weight: 600;
-      color: #ff80df;
-      margin-top: 8px;
-      font-size: 14px;
     }
+    .right-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 2rem;
+    }
+    .right-content ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .right-content ul li i { color: var(--primary-cyan); margin-top: 5px; }
 
     footer {
+      border-top: 1px solid var(--border);
       text-align: center;
-      padding: 18px;
-      font-size: 14px;
-      color: #aaa;
-      background: rgba(0, 0, 0, 0.6);
-      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 1.5rem 0;
+      margin-top: 4rem;
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.6);
+    }
+
+    /* Responsive */
+    @media(max-width: 900px) {
+      main { flex-direction: column; }
+      .left-box, .right-content { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -149,41 +167,58 @@
     <nav>
       <a href="/">Home</a>
       <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid">CodroidHub</a>
-      <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
+      <a href="/aboutCodroid" class="active">CodroidHub</a>
       <a href="/blogs">Blogs</a>
+      <a href="https://github.com/Sakshikabir" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank"><i class="fab fa-linkedin"></i></a>
     </nav>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main>
-    <h1>About CodroidHub</h1>
-    <div class="section-box">
-      <p>
-        CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
-        software development, data science, and emerging technologies. Our mission is to bridge the gap
-        between theory and real-world application through hands-on training, projects, and mentorship.
-      </p>
-      <p>
-        We believe in nurturing curiosity and creativity, enabling students to confidently solve problems
-        and contribute meaningfully in their careers. With expert mentors and a supportive community,
-        CodroidHub is your launchpad for tech success.
-      </p>
+    <!-- Left 50% -->
+    <div class="left-box">
+      <img src="https://placehold.co/600x400/0f0c29/00f0ff?text=Certificate" alt="Certificate">
+      <div class="social-links">
+        <a href="https://codroidhub.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Website"></a>
+        <a href="https://github.com/CodroidHub" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"></a>
+        <a href="https://www.linkedin.com/company/codroidhub" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"></a>
+      </div>
     </div>
 
-    <h2>Connect with Us</h2>
-    <div class="social-links">
-      <a href="https://codroidhub.com" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/841/841364.png" alt=""> Website</a>
-      <a href="https://github.com/CodroidHub" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt=""> GitHub</a>
-      <a href="https://www.linkedin.com/company/codroidhub" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt=""> LinkedIn</a>
-      <a href="#blogs"><img src="https://cdn-icons-png.flaticon.com/512/1355/1355443.png" alt=""> Blogs</a>
-    </div>
+    <!-- Right 50% -->
+    <div class="right-content">
+      <h1>About CodroidHub</h1>
+      <p>
+        CodroidHub Private Limited is a fast-growing EdTech and IT solutions company with a strong presence in India and Nepal, dedicated to transforming education and technology through innovation, collaboration, and industry partnerships.
+      </p>
 
-    <h2>What Students Say</h2>
-    <div class="feedback-card">
-      <p>"The training at CodroidHub helped me transition from a beginner to a confident developer. The mentors are amazing!"</p>
-      <div class="student-name">— Sakshi, Data Analytics Traineer</div>
+      <h2>Mission</h2>
+      <p>
+        To empower learners, educators, and organizations by providing accessible, industry-relevant, and technology-driven education solutions, fostering innovation and creating a skilled workforce prepared for the challenges of the digital era.
+      </p>
+
+      <h2>Vision</h2>
+      <p>
+        To become a global leader in EdTech and IT innovation, bridging the gap between education and industry by building a sustainable ecosystem of learning, technology, and entrepreneurship that impacts lives across borders.
+      </p>
+
+      <h2>The company specializes in:</h2>
+      <ul>
+        <li><i class="fas fa-check-circle"></i>EdTech Solutions: K-12 STEM & coding curriculum, industry-aligned skilling programs, and AI/ML upskilling initiatives.</li>
+        <li><i class="fas fa-check-circle"></i>IT Services: Web & mobile application development, game design, and AI/ML-driven enterprise solutions.</li>
+        <li><i class="fas fa-check-circle"></i>Training & Skilling Programs: Bootcamps, summer industrial training, workshops, and hybrid learning models with hands-on projects.</li>
+        <li><i class="fas fa-check-circle"></i>Industry Integration: LMS-driven learning journeys, global certifications, and project-based internships.</li>
+      </ul>
+
+      <h2>Key Takeaways</h2>
+      <ul>
+        <li><i class="fas fa-check-circle"></i>15+ collaborations with leading colleges and schools for curriculum integration, research support, and skilling programs.</li>
+        <li><i class="fas fa-check-circle"></i>5+ global IT industry partnerships driving innovation in AI, data analytics, and product development.</li>
+        <li><i class="fas fa-check-circle"></i>Expertise in Generative AI, Cloud Computing, Big Data, AR/VR, and Cybersecurity.</li>
+        <li><i class="fas fa-check-circle"></i>Flagship initiatives like Skill Yatra, AI for Your Work, and Coding for Schools.</li>
+        <li><i class="fas fa-check-circle"></i>Growing footprint across India and Nepal with educators, mentors, and industry experts.</li>
+      </ul>
     </div>
   </main>
 
@@ -219,7 +254,6 @@
       update() {
         this.x += this.vx;
         this.y += this.vy;
-
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
         this.draw();
@@ -236,7 +270,6 @@
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
           let distance = Math.sqrt(dx * dx + dy * dy);
-
           if (distance < 120) {
             ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
             ctx.lineWidth = 1;
@@ -255,7 +288,6 @@
       connect();
       requestAnimationFrame(animate);
     }
-
     animate();
 
     window.addEventListener('resize', () => {

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netflix Dashboard | Sakshi Kabir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      color: #ffffff;
+      min-height: 100vh;
+      background: radial-gradient(circle at 15% 0%, #0f0c29 0%, #302b63 45%, #24243e 100%);
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Animated Particle Background */
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-top: 40px;
+      text-shadow: 0px 0px 10px #00fff2;
+    }
+
+    p {
+      max-width: 850px;
+      margin: 20px auto;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #d1d1d1;
+    }
+
+    .btn-container {
+      margin: 25px 0;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #00f0ff, #ff0080);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 30px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0px 0px 15px rgba(0,240,255,0.5);
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 20px rgba(255,0,128,0.7);
+    }
+
+    .image-container {
+      margin: 35px auto;
+      max-width: 1000px;
+    }
+
+    .image-container img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0px 0px 22px rgba(0, 255, 242, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <h1>Netflix Dashboard</h1>
+  <p>
+    The dataset offers valuable insights into Netflix’s content distribution across genres, release years, and countries. 
+    It enables interactive analysis of viewing trends, popular categories, and strategic content planning.
+  </p>
+
+  <div class="btn-container">
+    <a href="https://www.kaggle.com/datasets/shivamb/netflix-shows" class="btn">Go to Dataset</a>
+    <a href="/PowerBI" class="btn">Back</a>
+  </div>
+
+  <div class="image-container">
+    <img src="static/netflix.png" alt="Netflix Dashboard">
+  </div>
+
+  <!-- Particle Effect Script (same as homepage) -->
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, { passive: true });
+
+    const particles = [];
+    const NUM = 80;
+
+    class Particle {
+      constructor() { this.reset(true); }
+      reset(randomXY=false){
+        this.x = randomXY ? Math.random() * canvas.width : (Math.random() < .5 ? 0 : canvas.width);
+        this.y = randomXY ? Math.random() * canvas.height : Math.random() * canvas.height;
+        this.radius = 2;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fill();
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        this.draw();
+      }
+    }
+
+    for (let i = 0; i < NUM; i++) particles.push(new Particle());
+
+    function connect() {
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 130) {
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.20)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => p.update());
+      connect();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>

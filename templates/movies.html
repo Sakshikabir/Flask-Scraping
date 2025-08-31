@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>About Me - Sakshi Kabir</title>
+  <title>📽️ Top IMDb Movies - Sakshi Kabir</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin:0; padding:0; }
     body {
       font-family: 'Rajdhani', sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       overflow-x: hidden;
     }
 
@@ -59,62 +62,87 @@
       color: #ff0080;
     }
 
-    /* Main Content */
     main {
-      max-width: 900px;
+      flex: 1;
+      max-width: 1150px;
       margin: 60px auto;
       padding: 30px;
       text-align: center;
     }
-    h1 {
+    h2 {
       font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      margin-bottom: 30px;
       color: #00f0ff;
-      font-size: 38px;
-      margin-bottom: 40px;
       text-shadow: 0 0 8px rgba(0,240,255,0.6);
     }
 
-    .about-container {
-      background: rgba(255,255,255,0.05);
-      padding: 40px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      line-height: 1.7;
-      font-size: 17px;
-      color: #ddd;
-      transition: transform 0.3s ease;
+    .table-container {
+      margin: 20px auto;
+      width: 90%;
+      overflow-x: auto;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,240,255,0.4);
     }
-    .about-container:hover {
-      transform: translateY(-6px);
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
     }
-    .about-container img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      box-shadow: 0 0 18px rgba(0,240,255,0.6);
-      border: 3px solid #00f0ff;
+    th, td {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 14px;
+      text-align: left;
+      color: #e0e0e0;
+      font-size: 0.95rem;
     }
-    .about-container h2 {
-      color: #ff80df;
-      margin-bottom: 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
-    .about-container p {
-      margin-bottom: 18px;
+    th {
+      background: rgba(0,240,255,0.2);
+      color: #00f0ff;
+      font-weight: 700;
+      text-transform: uppercase;
     }
 
-    /* Footer */
+    .buttons {
+      margin: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .buttons a, .buttons button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, #00f0ff, #ff0080);
+      box-shadow: 0 0 10px rgba(0,240,255,0.6);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .buttons a:hover, .buttons button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(0,240,255,0.9);
+    }
+    .buttons button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     footer {
       text-align: center;
-      padding: 18px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 20px;
       font-size: 14px;
       color: #aaa;
-      background: rgba(0, 0, 0, 0.6);
       border-top: 1px solid rgba(255,255,255,0.1);
-      margin-top: 50px;
     }
   </style>
 </head>
@@ -127,42 +155,48 @@
     <div class="logo">Sakshi Kabir</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid">CodroidHub</a>
+      <a href="/bar_movies">Bar Chart</a>
+      <a href="/pie_movies">Pie Chart</a>
       <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
-      <a href="/blogs">Blogs</a>
     </nav>
   </header>
 
-  <!-- About Section -->
   <main>
-    <h1>About Me</h1>
-    <div class="about-container">
-      <!-- Your Own Image -->
-      <img src="{{ url_for('static', filename='IMG-20250717-WA0002.jpg') }}" alt="Profile Picture">
-      
-      <h2>Hey, I'm Sakshi Kabir 👋</h2>
-      <p>
-        I am passionate about <strong>Data Science, Machine Learning</strong>.  
-        My journey revolves around solving real-world problems using data-driven insights and modern technologies.  
-      </p>
-      <p>
-        Currently exploring <strong>Web Scraping & Visualization, Power BI, SQL and AI/ML</strong> to build innovative solutions.  
-        I love creating visually appealing dashboards, automating tasks, and turning data into impactful stories.
-      </p>
-      <p>
-        Beyond coding, I enjoy <strong>sharing knowledge</strong> through blogs and collaborating on exciting projects that make a difference.
-      </p>
+    <h2>🎬 Top 10 IMDb Movies</h2>
+
+    <div class="buttons">
+      <a href="/bar_movies">📊 View Bar Chart</a>
+      <a href="/pie_movies">🥧 View Pie Chart</a>
+      <a href="/">⬅ Back to Home</a>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Movie Title</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for movie in movies %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ movie['title'] }}</td>
+            <td>{{ movie['rating'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
   </footer>
 
-  <!-- Background Animation Script -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
@@ -182,53 +216,48 @@
       }
       draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
         ctx.fillStyle = '#00f0ff';
         ctx.fill();
       }
       update() {
         this.x += this.vx;
         this.y += this.vy;
-
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        if(this.x<0||this.x>canvas.width) this.vx*=-1;
+        if(this.y<0||this.y>canvas.height) this.vy*=-1;
         this.draw();
       }
     }
 
-    for (let i = 0; i < numParticles; i++) {
-      particles.push(new Particle());
-    }
+    for(let i=0;i<numParticles;i++){particles.push(new Particle());}
 
-    function connect() {
-      for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
+    function connect(){
+      for(let a=0;a<particles.length;a++){
+        for(let b=a;b<particles.length;b++){
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 120) {
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+          let distance = Math.sqrt(dx*dx + dy*dy);
+          if(distance<120){
+            ctx.strokeStyle = 'rgba(0,240,255,0.2)';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.moveTo(particles[a].x,particles[a].y);
+            ctx.lineTo(particles[b].x,particles[b].y);
             ctx.stroke();
           }
         }
       }
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>p.update());
       connect();
       requestAnimationFrame(animate);
     }
-
     animate();
 
-    window.addEventListener('resize', () => {
+    window.addEventListener('resize', ()=> {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });

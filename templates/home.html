@@ -2,18 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CodroidHub - Summer Training</title>
+  <title>Sakshi Kabir | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    :root{
+      --glass-bg: rgba(255,255,255,0.05);
+      --glass-br: 18px;
+      --accent: #00f0ff;
+      --accent-2: #ff0080;
+      --text: #f2f2f2;
+      --muted: #cccccc;
+      --card-border: rgba(0,240,255,0.20);
+      --shadow-1: 0 8px 28px rgba(0,0,0,.6);
+    }
+    html { scroll-padding-top: 84px; } /* avoid header overlap */
     body {
       font-family: 'Rajdhani', sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: #e0e0e0;
+      background: radial-gradient(circle at 15% 0%, #0f0c29 0%, #302b63 45%, #24243e 100%);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -23,20 +34,22 @@
     /* Animated Background */
     canvas#bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
     }
 
     /* Header */
     header {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(6px);
-      padding: 18px 40px;
+      background: rgba(10, 10, 30, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 16px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -45,132 +58,399 @@
       font-family: 'Orbitron', sans-serif;
       font-size: 22px;
       font-weight: 700;
-      color: #00f0ff;
+      color: var(--accent);
       letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(0,240,255,0.8);
+      white-space: nowrap;
     }
     header nav {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       flex-wrap: wrap;
+      align-items: center;
     }
     header nav a {
-      color: #eee;
+      color: #ddd;
       text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
+      font-weight: 700;
+      font-size: 15px;
+      transition: 0.25s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      position: relative;
     }
     header nav a:hover {
-      color: #ff0080;
+      color: #fff;
+      background: rgba(0,240,255,0.10);
+      box-shadow: 0 0 10px rgba(0,240,255,0.35);
+    }
+    header nav a.active {
+      color: #fff;
+      background: rgba(0,240,255,0.14);
+      box-shadow: 0 0 10px rgba(0,240,255,0.4);
     }
 
-    /* Hero Section (Portfolio style) */
-    main {
-      flex: 1;
+    /* Section Styling */
+    section {
+      padding: 90px 20px;
+      text-align: center;
+      max-width: 1100px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 38px;
+      margin-bottom: 18px;
+      color: var(--accent);
+      text-shadow: 0 0 14px rgba(0,240,255,0.7);
+      letter-spacing: .5px;
+    }
+    section p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #ddd;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    #hero {
+      min-height: calc(100vh - 84px);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      gap: 16px;
       text-align: center;
-      padding: 50px 20px;
     }
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 48px;
-      margin-bottom: 25px;
-      color: #00f0ff;
-      text-shadow: 0 0 18px rgba(0,240,255,0.7);
+    #hero h1 {
+      font-size: clamp(34px, 6vw, 56px);
+      color: #ff00dd;
+      text-shadow: 0 0 22px rgba(255,0,221,0.85), 0 0 35px rgba(0,240,255,0.5);
+      animation: glow 2.6s ease-in-out infinite alternate;
     }
-    p.tagline {
+    #hero .tagline {
       font-size: 20px;
-      max-width: 650px;
-      margin-bottom: 50px;
-      color: #ddd;
-      line-height: 1.6;
+      max-width: 700px;
+      line-height: 1.8;
+      color: #e6e6e6;
+      margin-top: 6px;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 14px var(--accent); }
+      to   { text-shadow: 0 0 32px var(--accent-2); }
     }
 
-    /* Futuristic Explore Button */
-    .scroll-btn {
+    /* Button */
+    .btn {
       display: inline-block;
-      padding: 14px 34px;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      border-radius: 12px;
+      margin-top: 20px;
+      padding: 12px 26px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 14px;
       color: #fff;
-      font-size: 18px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 0 18px rgba(0,240,255,0.6), 0 0 35px rgba(255,0,128,0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 20px rgba(0,240,255,0.6), 0 0 36px rgba(255,0,128,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .scroll-btn:hover {
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 0 28px rgba(0,240,255,0.9), 0 0 55px rgba(255,0,128,0.7);
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 0 28px rgba(0,240,255,0.9), 0 0 52px rgba(255,0,128,0.6);
     }
+
+    /* About Section */
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--glass-bg);
+      padding: 46px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-1);
+      text-align: left;
+    }
+    .about-image { flex-shrink: 0; }
+    .profile-img {
+      width: 196px;
+      height: 196px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 22px rgba(0,240,255,0.8);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .profile-img:hover { transform: scale(1.04); box-shadow: 0 0 30px rgba(0,240,255,1); }
+
+    .about-text h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #ff00dd;
+    }
+    .about-text h2 {
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+    }
+    .about-text p { margin-bottom: 14px; color: #ddd; }
+    .highlight { color: #ff80df; }
+
+    /* General glass card */
+    .section-box {
+      background: var(--glass-bg);
+      padding: 32px;
+      border-radius: var(--glass-br);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 0 20px rgba(0,240,255,0.22);
+      margin-top: 22px;
+      text-align: left;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 26px;
+    }
+    .project-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--glass-br);
+      padding: 28px 26px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -50%;
+      width: 210%;
+      height: 210%;
+      background: radial-gradient(circle at 35% 35%, rgba(0,240,255,0.16), transparent 65%);
+      transform: rotate(25deg);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 14px 36px rgba(0,240,255,0.35);
+    }
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 0 8px rgba(0,240,255,.45));
+      transform: translateZ(24px);
+    }
+    .project-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-size: 19px;
+      letter-spacing: .3px;
+      transform: translateZ(20px);
+    }
+    .project-card p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      transform: translateZ(16px);
+    }
+    .project-card .btn { font-size: 14px; padding: 10px 18px; transform: translateZ(18px); }
 
     /* Footer */
     footer {
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(10, 10, 30, 0.8);
       padding: 18px;
       font-size: 14px;
       color: #aaa;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 60px;
     }
 
     /* Responsive */
+    @media (max-width: 880px) {
+      .about-container { flex-direction: column; text-align: center; }
+      .about-text { margin-top: 14px; }
+    }
     @media (max-width: 600px) {
-      h1 { font-size: 30px; }
-      p.tagline { font-size: 16px; margin-bottom: 30px; }
-      header nav { gap: 12px; font-size: 14px; }
+      header { padding: 14px 16px; }
+      header nav { gap: 10px; }
+      header nav a { padding: 6px 10px; font-size: 14px; }
+      section h2, .about-text h1 { font-size: 26px; }
+      section p, .about-text p { font-size: 16px; }
+    }
+    /* focus-visible for a11y */
+    a:focus-visible, .btn:focus-visible {
+      outline: 2px dashed var(--accent);
+      outline-offset: 2px;
     }
   </style>
 </head>
 <body>
   <!-- Animated Background -->
-  <canvas id="bg"></canvas>
+  <canvas id="bg" aria-hidden="true"></canvas>
 
   <!-- Header -->
   <header>
     <div class="logo">Sakshi Kabir</div>
-    <nav>
-      <a href="/aboutMe">About Me</a>
-      <a href="/aboutCodroid" target="_blank">CodroidHub</a>
-      <a href="/explore">Explore</a>
-      <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
-      <a href="/blogs">Blogs</a>
+    <nav aria-label="Primary">
+      <a href="#hero" class="active">Home</a>
+      <a href="#aboutMe">About Me</a>
+      <a href="#aboutCodroidhub">Codroidhub</a>
+      <a href="#projects">Projects</a>
+      <a href="#blogs">Blogs</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <!-- Portfolio Style Hero -->
-  <main>
+  <!-- Hero Section -->
+  <section id="hero">
     <h1>Job Oriented Training in Data Science</h1>
     <p class="tagline">Hands-on learning with real-world projects, mentorship, and career guidance.  
       Gain the skills to stand out in Data Science, Machine Learning, and AI.</p>
-    <a class="scroll-btn" href="/explore">Explore More</a>
-  </main>
+    <a class="btn" href="/explore">Explore My Work</a>
+  </section>
+
+<!-- About Section -->
+<section id="aboutMe">
+  <div class="about-container">
+    <div class="about-image">
+      <!-- Replace with your actual image -->
+      <img src="{{ url_for('static', filename='IMG-20250717-WA0002.jpg') }}" 
+           alt="Sakshi Kabir Profile Picture" 
+           class="profile-img">
+    </div>
+    <div class="about-text">
+      <h1>About Me</h1>
+      <h2>Hey, I'm <span class="highlight">Sakshi Kabir 👋</span></h2>
+      <p>I’m passionate about <strong>Data Science</strong> and <strong>Machine Learning</strong>, 
+         exploring AI/ML, Data Visualization, and automation.  
+         I love solving problems with data and building impactful solutions.</p>
+      <a href="/aboutMe" class="btn">Know More</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Codroidhub -->
+  <section id="aboutCodroidhub">
+    <h2>About CodroidHub</h2>
+    <div class="section-box">
+      <p>CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
+      software development, data science, and emerging technologies. Our mission is to bridge the gap
+      between theory and real-world application through hands-on training, projects, and mentorship.</p>
+      <p>We believe in nurturing curiosity and creativity, enabling students to confidently solve problems
+      and contribute meaningfully in their careers. With expert mentors and a supportive community,
+      CodroidHub is your launchpad for tech success.</p>
+      <a href="/aboutCodroid" class="btn">Know More</a>
+    </div>
+  </section> 
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card" data-tilt>
+        <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Power BI Icon" loading="lazy">
+        <h3>🚀 Power BI Dashboards</h3>
+        <p>Interactive analytics dashboards for business insights with data storytelling and KPIs.</p>
+        <a href="/PowerBI" class="btn">View Project</a>
+      </div>
+      <div class="project-card" data-tilt>
+        <img src="https://cdn-icons-png.flaticon.com/512/2103/2103832.png" alt="Machine Learning Icon" loading="lazy">
+        <h3>🤖 Machine Learning Models</h3>
+        <p>Predictive models built with Python, Pandas, and Scikit-learn to solve real-world problems.</p>
+        <button disabled style="opacity:0.6; cursor:not-allowed;">Coming Soon</button>
+      </div>
+      <div class="project-card" data-tilt>
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" alt="Flask Icon" loading="lazy">
+        <h3>🌐 Flask Portfolio</h3>
+        <p>A dynamic personal portfolio website created using Python + Flask framework.</p>
+        <a href="/" class="btn">View Project</a>
+      </div>
+      <div class="project-card" data-tilt>
+        <img src="https://cdn-icons-png.flaticon.com/512/1829/1829588.png" alt="Visualization Icon" loading="lazy">
+        <h3>📊 Data Visualization</h3>
+        <p>Beautiful insights with Matplotlib &amp; Seaborn, turning raw data into meaningful stories.</p>
+        <a href="/scraping" class="btn">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blogs -->
+  <section id="blogs">
+    <h2>Blogs</h2>
+    <p>I write about Data Science, Machine Learning, and my training journey.  
+       Check out my blogs for hands-on guides, learning notes, and project breakdowns.</p>
+    <a class="btn" href="/blogs">Read Blogs</a>
+  </section>
+
+ <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      📧 <a href="mailto:sakshikabir61@gmail.com" style="color:#00f0ff;">Email Me</a> &nbsp; | &nbsp;
+      🔗 <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank" style="color:#00f0ff;">LinkedIn</a> &nbsp; | &nbsp;
+      💻 <a href="https://github.com/Sakshikabir" target="_blank" style="color:#00f0ff;">GitHub</a>
+    </p>
+  </section>
 
   <!-- Footer -->
   <footer>
-    © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
+    © 2025 | Built with ❤️ by Sakshi Kabir | CodroidHub
   </footer>
 
-  <!-- Background Animation Script -->
+  <!-- Scripts -->
   <script>
+    /* ======= HiDPI Canvas Setup ======= */
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    let particles = [];
-    const numParticles = 80;
-
+    /* ======= Particle Background ======= */
+    const particles = [];
+    const NUM = 90;
     class Particle {
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.reset(true);
+      }
+      reset(randomXY=false){
+        this.x = randomXY ? Math.random() * canvas.width : (Math.random() < .5 ? 0 : canvas.width);
+        this.y = randomXY ? Math.random() * canvas.height : Math.random() * canvas.height;
         this.radius = 2;
-        this.vx = (Math.random() - 0.5) * 1;
-        this.vy = (Math.random() - 0.5) * 1;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
       }
       draw() {
         ctx.beginPath();
@@ -181,26 +461,21 @@
       update() {
         this.x += this.vx;
         this.y += this.vy;
-
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
         this.draw();
       }
     }
-
-    for (let i = 0; i < numParticles; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < NUM; i++) particles.push(new Particle());
 
     function connect() {
       for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
-          let dx = particles[a].x - particles[b].x;
-          let dy = particles[a].y - particles[b].y;
-          let distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < 120) {
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.2)';
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 130) {
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.20)';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
@@ -210,19 +485,60 @@
         }
       }
     }
-
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => p.update());
       connect();
       requestAnimationFrame(animate);
     }
-
     animate();
 
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+    /* ======= Section Reveal on Scroll ======= */
+    const sections = document.querySelectorAll('section');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    sections.forEach(sec => revealObserver.observe(sec));
+
+    /* ======= Scrollspy: Active Nav Link ======= */
+    const navLinks = Array.from(document.querySelectorAll('header nav a'));
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = navLinks.find(a => a.getAttribute('href') === '#' + id);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+    sections.forEach(sec => spyObserver.observe(sec));
+
+    /* ======= 3D Tilt on Project Cards (no library) ======= */
+    const tiltCards = document.querySelectorAll('.project-card[data-tilt]');
+    tiltCards.forEach(card => {
+      const rectCache = { w: 0, h: 0 };
+      function handleMove(e){
+        const rect = card.getBoundingClientRect();
+        rectCache.w = rect.width; rectCache.h = rect.height;
+        const x = (e.clientX - rect.left) / rect.width;    // 0 to 1
+        const y = (e.clientY - rect.top)  / rect.height;   // 0 to 1
+        const rotateY = (x - 0.5) * 12; // max 12deg
+        const rotateX = (0.5 - y) * 12;
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      }
+      function resetTilt(){ card.style.transform = ''; }
+      card.addEventListener('mousemove', handleMove);
+      card.addEventListener('mouseleave', resetTilt);
+      card.addEventListener('touchmove', (e) => {
+        if(!e.touches[0]) return;
+        const t = e.touches[0];
+        handleMove({ clientX: t.clientX, clientY: t.clientY });
+      }, { passive: true });
+      card.addEventListener('touchend', resetTilt);
     });
   </script>
 </body>

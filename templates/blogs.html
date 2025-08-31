@@ -83,7 +83,7 @@
     /* Blog Cards */
     .cards-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
       gap: 30px;
     }
     .card {
@@ -93,6 +93,10 @@
       padding: 25px 20px;
       box-shadow: 0 0 15px rgba(0,240,255,0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px; /* equal height cards */
     }
     .card:hover {
       transform: translateY(-8px) scale(1.03);
@@ -115,6 +119,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex-grow: 1;
     }
     .card button {
       align-self: flex-start;
@@ -126,7 +131,7 @@
       font-weight: 600;
       cursor: pointer;
       box-shadow: 0 0 12px rgba(0,240,255,0.5);
-      transition: 0.3s;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .card button:hover {
       transform: scale(1.08);
@@ -148,7 +153,10 @@
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .cards-container {
+        grid-template-columns: 1fr; /* 1 card per row on mobile */
+      }
       h1 { font-size: 26px; }
       header nav { gap: 12px; font-size: 14px; }
     }
@@ -177,34 +185,24 @@
     <h1>✨ Latest Blogs</h1>
     <div class="cards-container">
       <div class="card">
-        <h2>Introduction to Web Scraping</h2>
-        <p>Discover the basics of web scraping, how it works, and the tools you'll need to start extracting data from websites efficiently and ethically...</p>
-        <button onclick="window.location.href='https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd2'">Read More</button>
+        <h2>From Numbers to Knowledge: The Role of Data Analytics....</h2>
+        <p>We hear a lot about Data Analytics these days. But what does it really mean?...</p>
+        <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd1','_blank')">Read More</button>
       </div>
       <div class="card">
-        <h2>Getting Started with Data Science</h2>
-        <p>Data science combines statistics, programming, and domain expertise. Learn how to begin your journey and the essential skills required...</p>
-        <button onclick="alert('Read more about Getting Started with Data Science')">Read More</button>
+        <h2>Unlocking the Power of Data: The Domain of Data Analytics</h2>
+        <p>In today's digital world, Data Analytics isn’t just a buzzword — it’s a necessity. From finance to healthcare, marketing to logistics, data-driven decisions are reshaping how businesses operate and grow....</p>
+        <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd6','_blank')">Read More</button>
       </div>
       <div class="card">
-        <h2>Power BI for Beginners</h2>
-        <p>Power BI is a powerful business analytics tool. Understand its core features and how to create interactive reports that can drive data-driven decisions...</p>
-        <button onclick="alert('Read more about Power BI for Beginners')">Read More</button>
+        <h2>Lessons I Learned in My First Month of Data Analytics Training</h2>
+        <p>I always thought analysis meant cool charts and dashboards....</p>
+        <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98f91','_blank')">Read More</button>
       </div>
       <div class="card">
         <h2>Python Libraries for AI & ML</h2>
         <p>Explore the most popular Python libraries used in AI and machine learning, including TensorFlow, PyTorch, and Scikit-learn...</p>
-        <button onclick="alert('Read more about Python Libraries for AI & ML')">Read More</button>
-      </div>
-      <div class="card">
-        <h2>Effective Data Visualization Techniques</h2>
-        <p>Learn how to visualize data effectively using charts, dashboards, and interactive tools to convey insights clearly...</p>
-        <button onclick="alert('Read more about Effective Data Visualization Techniques')">Read More</button>
-      </div>
-      <div class="card">
-        <h2>Building Scalable Web Scrapers</h2>
-        <p>Understand how to design web scrapers that can handle large-scale data extraction tasks while managing errors, proxies, and rate limits gracefully...</p>
-        <button onclick="alert('Read more about Building Scalable Web Scrapers')">Read More</button>
+        <button disabled style="opacity:0.6; cursor:not-allowed;">Coming Soon</button>
       </div>
     </div>
   </main>
@@ -253,7 +251,7 @@
 
     function connect() {
       for (let a = 0; a < particles.length; a++) {
-        for (let b = a; b < particles.length; b++) {
+        for (let b = a + 1; b < particles.length; b++) {
           let dx = particles[a].x - particles[b].x;
           let dy = particles[a].y - particles[b].y;
           let distance = Math.sqrt(dx * dx + dy * dy);
