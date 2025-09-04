@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Sakshi Kabir | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
+    /* ========= ROOT & RESET ========= */
     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
     :root{
       --glass-bg: rgba(255,255,255,0.05);
@@ -16,11 +17,15 @@
       --accent: #00f0ff;
       --accent-2: #ff0080;
       --text: #f2f2f2;
-      --muted: #cccccc;
+      --muted: #cfcfe4;
       --card-border: rgba(0,240,255,0.20);
       --shadow-1: 0 8px 28px rgba(0,0,0,.6);
+      --shadow-2: 0 14px 40px rgba(0,0,0,.55);
+      --ok: #31d0aa;
+      --warn: #ffb14e;
+      --err: #ff6d7a;
     }
-    html { scroll-padding-top: 84px; } /* avoid header overlap */
+    html { scroll-padding-top: 84px; }
     body {
       font-family: 'Rajdhani', sans-serif;
       background: radial-gradient(circle at 15% 0%, #0f0c29 0%, #302b63 45%, #24243e 100%);
@@ -31,268 +36,278 @@
       overflow-x: hidden;
     }
 
-    /* Animated Background */
+    /* ========= GLOBAL UTILS ========= */
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding:0; margin:-1px; overflow:hidden; clip: rect(0,0,0,0); border:0; }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+
+    /* ========= BACKGROUND CANVAS ========= */
     canvas#bg {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1;
     }
 
-    /* Header */
+    /* ========= HEADER / NAV ========= */
     header {
       background: rgba(10, 10, 30, 0.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       padding: 16px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      position: sticky; top: 0; z-index: 1000;
     }
-    header .logo {
+    .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 2px;
-      text-shadow: 0 0 8px rgba(0,240,255,0.8);
-      white-space: nowrap;
+      font-size: 22px; font-weight: 700; color: var(--accent);
+      letter-spacing: 2px; text-shadow: 0 0 8px rgba(0,240,255,0.8); white-space: nowrap;
     }
-    header nav {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+    header nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
     header nav a {
-      color: #ddd;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
-      transition: 0.25s ease;
-      padding: 8px 12px;
-      border-radius: 8px;
-      position: relative;
+      color: #ddd; text-decoration: none; font-weight: 700; font-size: 15px;
+      transition: 0.25s ease; padding: 8px 12px; border-radius: 8px; position: relative;
     }
     header nav a:hover {
-      color: #fff;
-      background: rgba(0,240,255,0.10);
-      box-shadow: 0 0 10px rgba(0,240,255,0.35);
+      color: #fff; background: rgba(0,240,255,0.10); box-shadow: 0 0 10px rgba(0,240,255,0.35);
     }
     header nav a.active {
-      color: #fff;
-      background: rgba(0,240,255,0.14);
-      box-shadow: 0 0 10px rgba(0,240,255,0.4);
+      color: #fff; background: rgba(0,240,255,0.14); box-shadow: 0 0 10px rgba(0,240,255,0.4);
     }
 
-    /* Section Styling */
-    section {
-      padding: 90px 20px;
-      text-align: center;
-      max-width: 1100px;
-      margin: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity .8s ease, transform .8s ease;
-    }
-    section.visible { opacity: 1; transform: translateY(0); }
-
+    /* ========= SECTIONS ========= */
+    section { padding: 90px 0; text-align: center; }
     section h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 38px;
-      margin-bottom: 18px;
-      color: var(--accent);
-      text-shadow: 0 0 14px rgba(0,240,255,0.7);
-      letter-spacing: .5px;
+      font-family: 'Orbitron', sans-serif; font-size: 38px; margin-bottom: 18px;
+      color: var(--accent); text-shadow: 0 0 14px rgba(0,240,255,0.7); letter-spacing: .5px;
     }
     section p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: #ddd;
-      max-width: 850px;
-      margin: 0 auto;
+      font-size: 18px; line-height: 1.7; color: #ddd; max-width: 850px; margin: 0 auto;
     }
 
-    /* Hero Section */
+    /* ========= HERO ========= */
     #hero {
       min-height: calc(100vh - 84px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      text-align: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px;
     }
-    #hero h1 {
+    #hero .hero-title {
       font-size: clamp(34px, 6vw, 56px);
       color: #ff00dd;
       text-shadow: 0 0 22px rgba(255,0,221,0.85), 0 0 35px rgba(0,240,255,0.5);
-      animation: glow 2.6s ease-in-out infinite alternate;
+      line-height: 1.2;
     }
-    #hero .tagline {
-      font-size: 20px;
-      max-width: 700px;
-      line-height: 1.8;
+    #hero .typed {
+      display: inline-block;
+      min-height: 1.2em;
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      animation: caret .9s steps(1) infinite;
       color: #e6e6e6;
-      margin-top: 6px;
+      font-size: clamp(18px, 2.6vw, 22px);
+      margin-top: 4px;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 14px var(--accent); }
-      to   { text-shadow: 0 0 32px var(--accent-2); }
-    }
+    @keyframes caret { 50% { border-right-color: transparent; } }
 
-    /* Button */
+    #hero .tagline {
+      font-size: 20px; max-width: 720px; line-height: 1.8; color: #e6e6e6; margin-top: 4px;
+    }
+    .cta-row { display: flex; gap: 14px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+
+    /* ========= BUTTON ========= */
     .btn {
       display: inline-block;
-      margin-top: 20px;
       padding: 12px 26px;
       background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-radius: 14px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
+      border-radius: 14px; color: #fff; font-size: 16px; font-weight: 700;
       text-decoration: none;
       box-shadow: 0 0 20px rgba(0,240,255,0.6), 0 0 36px rgba(255,0,128,0.35);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .btn:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 0 28px rgba(0,240,255,0.9), 0 0 52px rgba(255,0,128,0.6);
+    .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 28px rgba(0,240,255,0.9), 0 0 52px rgba(255,0,128,0.6); }
+    .btn.secondary {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
+    .btn.secondary:hover { background: rgba(255,255,255,0.12); }
 
-    /* About Section */
-    .about-container {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      background: var(--glass-bg);
-      padding: 46px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: var(--shadow-1);
-      text-align: left;
+    /* ========= ABOUT ========= */
+    #aboutMe .about-wrap {
+      display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: center;
+      background: var(--glass-bg); padding: 46px; border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: var(--shadow-1); text-align: left;
     }
-    .about-image { flex-shrink: 0; }
     .profile-img {
-      width: 196px;
-      height: 196px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--accent);
-      box-shadow: 0 0 22px rgba(0,240,255,0.8);
+      width: 196px; height: 196px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--accent); box-shadow: 0 0 22px rgba(0,240,255,0.8);
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .profile-img:hover { transform: scale(1.04); box-shadow: 0 0 30px rgba(0,240,255,1); }
-
     .about-text h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
-      margin-bottom: 10px;
-      color: #ff00dd;
+      font-family: 'Orbitron', sans-serif; font-size: 32px; margin-bottom: 10px; color: #ff00dd;
     }
     .about-text h2 {
-      color: var(--accent);
-      margin-bottom: 16px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 22px;
+      color: var(--accent); margin-bottom: 16px; font-family: 'Orbitron', sans-serif; font-size: 22px;
     }
     .about-text p { margin-bottom: 14px; color: #ddd; }
     .highlight { color: #ff80df; }
 
-    /* General glass card */
-    .section-box {
-      background: var(--glass-bg);
-      padding: 32px;
-      border-radius: var(--glass-br);
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 0 20px rgba(0,240,255,0.22);
-      margin-top: 22px;
-      text-align: left;
+    /* Skills grid */
+    .skills {
+      margin-top: 18px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px;
+    }
+    .skill-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px; padding: 14px 16px; box-shadow: 0 8px 20px rgba(0,0,0,.35);
+    }
+    .skill-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .skill-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 8px rgba(0,240,255,.8); }
+    .skill-name { font-weight: 700; letter-spacing: .3px; }
+    .meter {
+      margin-top: 8px; width: 100%; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden;
+    }
+    .meter > span {
+      display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      width: 0%;
+      transition: width 1.2s ease;
     }
 
-    /* Projects Grid */
+    /* ========= CODROIDHUB ========= */
+    #aboutCodroidhub .box {
+      background: var(--glass-bg); padding: 36px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow-2); text-align: left;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 26px; align-items: center;
+    }
+    .cdh-title { font-family: 'Orbitron', sans-serif; font-size: 24px; color: var(--accent); margin-bottom: 12px; }
+    .cdh-points { margin-top: 10px; }
+    .cdh-points li { margin-left: 18px; margin-bottom: 8px; color: var(--muted); }
+
+    .cdh-side {
+      justify-self: center; width: 100%; max-width: 380px; aspect-ratio: 1.2/1;
+      border-radius: 18px; border: 1px dashed rgba(0,240,255,0.35);
+      background:
+        radial-gradient( 600px 180px at -20% -20%, rgba(0,240,255,.20), transparent 60% ),
+        radial-gradient( 600px 180px at 120% 120%, rgba(255,0,128,.16), transparent 60% ),
+        rgba(255,255,255,0.04);
+      display: grid; place-items: center;
+      box-shadow: 0 10px 32px rgba(0,0,0,.45);
+    }
+    .cdh-badge {
+      padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06); font-weight: 700; letter-spacing: .3px;
+    }
+
+    /* ========= PROJECTS ========= */
     .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 28px;
-      margin-top: 26px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px; margin-top: 26px;
     }
     .project-card {
       background: var(--glass-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--glass-br);
-      padding: 28px 26px;
-      text-align: center;
+      border: 1px solid var(--card-border); border-radius: var(--glass-br);
+      padding: 28px 26px; text-align: center;
       box-shadow: 0 6px 20px rgba(0,0,0,0.5);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-      position: relative;
-      overflow: hidden;
-      will-change: transform;
-      transform-style: preserve-3d;
+      position: relative; overflow: hidden; will-change: transform; transform-style: preserve-3d;
     }
     .project-card::before {
-      content: "";
-      position: absolute;
-      top: -60%;
-      left: -50%;
-      width: 210%;
-      height: 210%;
+      content: ""; position: absolute; top: -60%; left: -50%; width: 210%; height: 210%;
       background: radial-gradient(circle at 35% 35%, rgba(0,240,255,0.16), transparent 65%);
-      transform: rotate(25deg);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
+      transform: rotate(25deg); opacity: 0; transition: opacity 0.35s ease; pointer-events: none;
     }
-    .project-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 14px 36px rgba(0,240,255,0.35);
-    }
+    .project-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 14px 36px rgba(0,240,255,0.35); }
     .project-card:hover::before { opacity: 1; }
-
     .project-card img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 14px;
-      filter: drop-shadow(0 0 8px rgba(0,240,255,.45));
-      transform: translateZ(24px);
+      width: 60px; height: 60px; margin-bottom: 14px;
+      filter: drop-shadow(0 0 8px rgba(0,240,255,.45)); transform: translateZ(24px);
     }
     .project-card h3 {
-      font-family: 'Orbitron', sans-serif;
-      color: var(--accent);
-      margin-bottom: 10px;
-      font-size: 19px;
-      letter-spacing: .3px;
-      transform: translateZ(20px);
+      font-family: 'Orbitron', sans-serif; color: var(--accent); margin-bottom: 10px; font-size: 19px; letter-spacing: .3px; transform: translateZ(20px);
     }
-    .project-card p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      transform: translateZ(16px);
-    }
-    .project-card .btn { font-size: 14px; padding: 10px 18px; transform: translateZ(18px); }
+    .project-card p { font-size: 16px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; transform: translateZ(16px); }
 
-    /* Footer */
+    .stack-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 12px; }
+    .stack-badge {
+      padding: 4px 10px; font-size: 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.06);
+    }
+
+    .project-card .btn { font-size: 14px; padding: 10px 18px; transform: translateZ(18px); }
+    .btn.disabled, .project-card button[disabled] {
+      opacity: .6; cursor: not-allowed; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: none;
+    }
+
+    /* ========= BLOGS ========= */
+    .blog-intro { margin-bottom: 18px; }
+    .blog-grid {
+      margin-top: 18px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px;
+    }
+    .blog-card {
+      background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; overflow: hidden; text-align: left; box-shadow: var(--shadow-1);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.55); }
+    .blog-thumb { width: 100%; height: 150px; object-fit: cover; background: rgba(255,255,255,0.06); }
+    .blog-body { padding: 16px 18px; }
+    .blog-title { font-weight: 800; letter-spacing: .3px; margin-bottom: 8px; }
+    .blog-meta { font-size: 13px; color: #b9b9d9; margin-bottom: 10px; }
+    .btn-small { display: inline-block; padding: 8px 14px; font-size: 14px; border-radius: 12px; text-decoration: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: #fff; }
+    .btn-small:hover { background: rgba(255,255,255,0.14); }
+
+    /* ========= CONTACT ========= */
+    .contact-wrap { margin-top: 10px; }
+    .contact-links a { color: var(--accent); text-decoration: none; }
+    .contact-links a:hover { text-decoration: underline; }
+
+    .contact-grid {
+      margin-top: 20px;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: stretch;
+    }
+    form.contact-card {
+      background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 18px; text-align: left; box-shadow: var(--shadow-1);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field { display: grid; gap: 6px; margin-bottom: 12px; }
+    label { font-weight: 700; color: #e9e9f2; letter-spacing: .2px; }
+    input, textarea {
+      width: 100%; padding: 12px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06); color: #fff; outline: none;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .form-actions { display: flex; gap: 10px; align-items: center; justify-content: flex-start; }
+    .note { font-size: 13px; color: #bdbddd; }
+
+    .status { font-size: 14px; font-weight: 700; }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--err); }
+
+    .contact-side {
+      background: var(--glass-bg); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 20px; text-align: left; box-shadow: var(--shadow-1);
+    }
+    .socials { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .social-pill {
+      padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    /* ========= FOOTER ========= */
     footer {
-      text-align: center;
-      background: rgba(10, 10, 30, 0.8);
-      padding: 18px;
-      font-size: 14px;
-      color: #aaa;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center; background: rgba(10, 10, 30, 0.8);
+      padding: 18px; font-size: 14px; color: #aaa; border-top: 1px solid rgba(255, 255, 255, 0.08);
       margin-top: 60px;
     }
 
-    /* Responsive */
+    /* ========= RESPONSIVE ========= */
+    @media (max-width: 1000px) {
+      #aboutCodroidhub .box { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 880px) {
-      .about-container { flex-direction: column; text-align: center; }
-      .about-text { margin-top: 14px; }
+      #aboutMe .about-wrap { grid-template-columns: 1fr; text-align: center; }
     }
     @media (max-width: 600px) {
       header { padding: 14px 16px; }
@@ -300,19 +315,20 @@
       header nav a { padding: 6px 10px; font-size: 14px; }
       section h2, .about-text h1 { font-size: 26px; }
       section p, .about-text p { font-size: 16px; }
+      .form-row { grid-template-columns: 1fr; }
     }
-    /* focus-visible for a11y */
-    a:focus-visible, .btn:focus-visible {
-      outline: 2px dashed var(--accent);
-      outline-offset: 2px;
+
+    /* a11y */
+    a:focus-visible, .btn:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px dashed var(--accent); outline-offset: 2px;
     }
   </style>
 </head>
 <body>
-  <!-- Animated Background -->
+  <!-- ===== BG Canvas ===== -->
   <canvas id="bg" aria-hidden="true"></canvas>
 
-  <!-- Header -->
+  <!-- ===== Header ===== -->
   <header>
     <div class="logo">Sakshi Kabir</div>
     <nav aria-label="Primary">
@@ -325,106 +341,240 @@
     </nav>
   </header>
 
-  <!-- Hero Section -->
+  <!-- ===== Hero ===== -->
   <section id="hero">
-    <h1>Job Oriented Training in Data Science</h1>
-    <p class="tagline">Hands-on learning with real-world projects, mentorship, and career guidance.  
-      Gain the skills to stand out in Data Science, Machine Learning, and AI.</p>
-    <a class="btn" href="/explore">Explore My Work</a>
+    <div class="container fade-up">
+      <h1 class="hero-title">Hi, I'm <span style="color:#ff9be6;">Sakshi Kabir</span></h1>
+      <div class="typed" id="typedText" aria-live="polite"></div>
+      <p class="tagline">
+        Hands-on learning with real-world projects, mentorship, and career guidance.<br />
+        Gain the skills to stand out in Data Science, Machine Learning, and AI.
+      </p>
+
+      <!-- Keep your original CTA link intact -->
+      <div class="cta-row">
+        <a class="btn" href="/explore">Explore My Work</a>
+        <a class="btn secondary" href="#contact">Contact Me</a>
+      </div>
+    </div>
   </section>
 
-<!-- About Section -->
-<section id="aboutMe">
-  <div class="about-container">
-    <div class="about-image">
-      <!-- Replace with your actual image -->
-      <img src="{{ url_for('static', filename='IMG-20250717-WA0002.jpg') }}" 
-           alt="Sakshi Kabir Profile Picture" 
-           class="profile-img">
+  <!-- ===== About Me ===== -->
+  <section id="aboutMe">
+    <div class="container">
+      <div class="about-wrap fade-up">
+        <div>
+          <img
+            src="{{ url_for('static', filename='IMG-20250717-WA0002.jpg') }}"
+            alt="Sakshi Kabir Profile Picture"
+            class="profile-img"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-text">
+          <h1>About Me</h1>
+          <h2>Hey, I'm <span class="highlight">Sakshi Kabir 👋</span></h2>
+          <p>
+            I’m passionate about <strong>Data Science</strong> and <strong>Machine Learning</strong>,
+            exploring AI/ML, Data Visualization, and automation. I love solving problems with data and
+            building impactful solutions.
+          </p>
+          <a href="/aboutMe" class="btn">Know More</a>
+
+          <!-- Skills Grid -->
+          <div class="skills" aria-label="Skills">
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">Python</span></div>
+              <div class="meter"><span style="width: 0%" data-target="92"></span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">Flask</span></div>
+              <div class="meter"><span style="width: 0%" data-target="88"></span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">SQL</span></div>
+              <div class="meter"><span style="width: 0%" data-target="80"></span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">Machine Learning</span></div>
+              <div class="meter"><span style="width: 0%" data-target="84"></span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">Power BI</span></div>
+              <div class="meter"><span style="width: 0%" data-target="78"></span></div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-top"><span class="skill-dot"></span><span class="skill-name">Web Scraping</span></div>
+              <div class="meter"><span style="width: 0%" data-target="86"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="about-text">
-      <h1>About Me</h1>
-      <h2>Hey, I'm <span class="highlight">Sakshi Kabir 👋</span></h2>
-      <p>I’m passionate about <strong>Data Science</strong> and <strong>Machine Learning</strong>, 
-         exploring AI/ML, Data Visualization, and automation.  
-         I love solving problems with data and building impactful solutions.</p>
-      <a href="/aboutMe" class="btn">Know More</a>
+  </section>
+
+  <!-- ===== CodroidHub ===== -->
+  <section id="aboutCodroidhub">
+    <div class="container">
+      <h2 class="fade-up">About CodroidHub</h2>
+      <div class="box fade-up">
+        <div>
+          <p class="cdh-title">Empowering learners with practical, industry-focused skills</p>
+          <p>
+            CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
+            software development, data science, and emerging technologies. Our mission is to bridge the gap
+            between theory and real-world application through hands-on training, projects, and mentorship.
+          </p>
+          <ul class="cdh-points">
+            <li>Real-world projects & mentorship</li>
+            <li>AI/ML, Data Analytics, and full-stack development</li>
+            <li>Career guidance & portfolio building</li>
+          </ul>
+          <!-- Keep your original route intact -->
+          <div style="margin-top:14px;">
+            <a href="/aboutCodroid" class="btn">Know More</a>
+          </div>
+        </div>
+        <div class="cdh-side">
+          <span class="cdh-badge">CodroidHub • Since 2023</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="fade-up">Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card fade-up" data-tilt>
+          <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Power BI Icon" loading="lazy">
+          <h3>🚀 Power BI Dashboards</h3>
+          <p>Interactive analytics dashboards for business insights with data storytelling and KPIs.</p>
+          <div class="stack-row" aria-label="Tech Stack">
+            <span class="stack-badge">Power BI</span>
+            <span class="stack-badge">DAX</span>
+            <span class="stack-badge">Flask</span>
+          </div>
+          <!-- keep your original route -->
+          <a href="/PowerBI" class="btn">View Project</a>
+        </div>
+
+        <div class="project-card fade-up" data-tilt>
+          <img src="https://cdn-icons-png.flaticon.com/512/2103/2103832.png" alt="Machine Learning Icon" loading="lazy">
+          <h3>🤖 Machine Learning Models</h3>
+          <p>Predictive models built with Python, Pandas, and Scikit-learn to solve real-world problems.</p>
+          <div class="stack-row">
+            <span class="stack-badge">Python</span>
+            <span class="stack-badge">scikit-learn</span>
+            <span class="stack-badge">Pandas</span>
+          </div>
+          <!-- keep your original disabled state -->
+          <button class="btn disabled" disabled>Coming Soon</button>
+        </div>
+
+        <div class="project-card fade-up" data-tilt>
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" alt="Flask Icon" loading="lazy">
+          <h3>🌐 Flask Portfolio</h3>
+          <p>A dynamic personal portfolio website created using Python + Flask framework.</p>
+          <div class="stack-row">
+            <span class="stack-badge">Flask</span>
+            <span class="stack-badge">HTML/CSS</span>
+            <span class="stack-badge">JS</span>
+          </div>
+          <!-- keep your original route -->
+          <a href="/" class="btn">View Project</a>
+        </div>
+
+        <div class="project-card fade-up" data-tilt>
+          <img src="https://cdn-icons-png.flaticon.com/512/1829/1829588.png" alt="Visualization Icon" loading="lazy">
+          <h3>📊 Data Visualization</h3>
+          <p>Beautiful insights with Matplotlib &amp; Seaborn, turning raw data into meaningful stories.</p>
+          <div class="stack-row">
+            <span class="stack-badge">Matplotlib</span>
+            <span class="stack-badge">Seaborn</span>
+            <span class="stack-badge">Python</span>
+          </div>
+          <!-- keep your original route -->
+          <a href="/scraping" class="btn">View Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Blogs ===== -->
+  <section id="blogs">
+    <div class="container">
+      <h2 class="fade-up">Blogs</h2>
+      <p class="blog-intro fade-up">I write about Data Science, Machine Learning, and my training journey.  
+        Check out my blogs for hands-on guides, learning notes, and project breakdowns.</p>
+
+      <!-- Preview Cards (static placeholders) -->
+      <div class="blog-grid">
+        <article class="blog-card fade-up">
+          <img class="blog-thumb" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Laptop and code" loading="lazy">
+          <div class="blog-body">
+            <div class="blog-title">Getting Started with Flask + Jinja</div>
+            <div class="blog-meta">Guide • 5 min read</div>
+            <p>How I structure routes, templates, and static assets to ship projects quickly.</p>
+            <!-- keep your original route to blogs -->
+            <a class="btn-small" href="/blogs">Read More</a>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <img class="blog-thumb" src="https://images.unsplash.com/photo-1581091215367-59ab6b4b1b83?q=80&w=1200&auto=format&fit=crop" alt="Data visualization dashboard" loading="lazy">
+          <div class="blog-body">
+            <div class="blog-title">Power BI Storytelling Tips</div>
+            <div class="blog-meta">Tips • 4 min read</div>
+            <p>My favorite visuals and KPI patterns that make dashboards pop.</p>
+            <a class="btn-small" href="/blogs">Read More</a>
+          </div>
+        </article>
+
+        <article class="blog-card fade-up">
+          <img class="blog-thumb" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Python code" loading="lazy">
+          <div class="blog-body">
+            <div class="blog-title">Scraping Ethically with Python</div>
+            <div class="blog-meta">Best Practices • 6 min read</div>
+            <p>Respect robots.txt, add delays, and structure pipelines cleanly.</p>
+            <a class="btn-small" href="/blogs">Read More</a>
+          </div>
+        </article>
+      </div>
+
+      <div style="margin-top: 18px;" class="fade-up">
+        <!-- keep your original CTA/link intact -->
+        <a class="btn" href="/blogs">View All Blogs</a>
+      </div>
+    </div>
+  </section>
+
+<!-- ===== Contact ===== -->
+<section id="contact">
+  <div class="container">
+    <h2 class="fade-up">Contact</h2>
+
+    <div class="contact-wrap fade-up" style="text-align:center;">
+      <p>If you'd like to connect or collaborate, feel free to reach out:</p>
+      <p class="contact-links" style="margin-top:10px; font-size:18px;">
+        📧 <a href="mailto:sakshikabir61@gmail.com">Email</a> &nbsp; | &nbsp;
+        🔗 <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank" rel="noopener">LinkedIn</a> &nbsp; | &nbsp;
+        💻 <a href="https://github.com/Sakshikabir" target="_blank" rel="noopener">GitHub</a>
+      </p>
     </div>
   </div>
 </section>
 
 
-  <!-- Codroidhub -->
-  <section id="aboutCodroidhub">
-    <h2>About CodroidHub</h2>
-    <div class="section-box">
-      <p>CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
-      software development, data science, and emerging technologies. Our mission is to bridge the gap
-      between theory and real-world application through hands-on training, projects, and mentorship.</p>
-      <p>We believe in nurturing curiosity and creativity, enabling students to confidently solve problems
-      and contribute meaningfully in their careers. With expert mentors and a supportive community,
-      CodroidHub is your launchpad for tech success.</p>
-      <a href="/aboutCodroid" class="btn">Know More</a>
-    </div>
-  </section> 
-
-  <!-- Projects -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card" data-tilt>
-        <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Power BI Icon" loading="lazy">
-        <h3>🚀 Power BI Dashboards</h3>
-        <p>Interactive analytics dashboards for business insights with data storytelling and KPIs.</p>
-        <a href="/PowerBI" class="btn">View Project</a>
-      </div>
-      <div class="project-card" data-tilt>
-        <img src="https://cdn-icons-png.flaticon.com/512/2103/2103832.png" alt="Machine Learning Icon" loading="lazy">
-        <h3>🤖 Machine Learning Models</h3>
-        <p>Predictive models built with Python, Pandas, and Scikit-learn to solve real-world problems.</p>
-        <button disabled style="opacity:0.6; cursor:not-allowed;">Coming Soon</button>
-      </div>
-      <div class="project-card" data-tilt>
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" alt="Flask Icon" loading="lazy">
-        <h3>🌐 Flask Portfolio</h3>
-        <p>A dynamic personal portfolio website created using Python + Flask framework.</p>
-        <a href="/" class="btn">View Project</a>
-      </div>
-      <div class="project-card" data-tilt>
-        <img src="https://cdn-icons-png.flaticon.com/512/1829/1829588.png" alt="Visualization Icon" loading="lazy">
-        <h3>📊 Data Visualization</h3>
-        <p>Beautiful insights with Matplotlib &amp; Seaborn, turning raw data into meaningful stories.</p>
-        <a href="/scraping" class="btn">View Project</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blogs -->
-  <section id="blogs">
-    <h2>Blogs</h2>
-    <p>I write about Data Science, Machine Learning, and my training journey.  
-       Check out my blogs for hands-on guides, learning notes, and project breakdowns.</p>
-    <a class="btn" href="/blogs">Read Blogs</a>
-  </section>
-
- <!-- Contact -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>
-      📧 <a href="mailto:sakshikabir61@gmail.com" style="color:#00f0ff;">Email Me</a> &nbsp; | &nbsp;
-      🔗 <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank" style="color:#00f0ff;">LinkedIn</a> &nbsp; | &nbsp;
-      💻 <a href="https://github.com/Sakshikabir" target="_blank" style="color:#00f0ff;">GitHub</a>
-    </p>
-  </section>
-
-  <!-- Footer -->
+  <!-- ===== Footer ===== -->
   <footer>
     © 2025 | Built with ❤️ by Sakshi Kabir | CodroidHub
   </footer>
 
-  <!-- Scripts -->
+  <!-- ===== Scripts ===== -->
   <script>
-    /* ======= HiDPI Canvas Setup ======= */
+    /* ===== HiDPI Canvas Setup ===== */
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
     function resizeCanvas(){
@@ -438,13 +588,11 @@
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    /* ======= Particle Background ======= */
+    /* ===== Particle Background ===== */
     const particles = [];
     const NUM = 90;
     class Particle {
-      constructor() {
-        this.reset(true);
-      }
+      constructor() { this.reset(true); }
       reset(randomXY=false){
         this.x = randomXY ? Math.random() * canvas.width : (Math.random() < .5 ? 0 : canvas.width);
         this.y = randomXY ? Math.random() * canvas.height : Math.random() * canvas.height;
@@ -453,14 +601,11 @@
         this.vy = (Math.random() - 0.5) * 1.2;
       }
       draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#00f0ff';
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00f0ff'; ctx.fill();
       }
       update() {
-        this.x += this.vx;
-        this.y += this.vy;
+        this.x += this.vx; this.y += this.vy;
         if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
         this.draw();
@@ -475,36 +620,29 @@
           const dy = particles[a].y - particles[b].y;
           const dist = Math.hypot(dx, dy);
           if (dist < 130) {
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.20)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particles[a].x, particles[a].y);
-            ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.stroke();
+            ctx.strokeStyle = 'rgba(0, 240, 255, 0.20)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y); ctx.stroke();
           }
         }
       }
     }
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      connect();
-      requestAnimationFrame(animate);
+      particles.forEach(p => p.update()); connect(); requestAnimationFrame(animate);
     }
     animate();
 
-    /* ======= Section Reveal on Scroll ======= */
-    const sections = document.querySelectorAll('section');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.15 });
-    sections.forEach(sec => revealObserver.observe(sec));
+    /* ===== Intersection Reveal ===== */
+    const revealEls = document.querySelectorAll('.fade-up');
+    const revObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revObs.observe(el));
 
-    /* ======= Scrollspy: Active Nav Link ======= */
+    /* ===== Scrollspy ===== */
     const navLinks = Array.from(document.querySelectorAll('header nav a'));
-    const spyObserver = new IntersectionObserver((entries) => {
+    const sections = document.querySelectorAll('section[id]');
+    const spy = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         const id = entry.target.getAttribute('id');
         const link = navLinks.find(a => a.getAttribute('href') === '#' + id);
@@ -515,18 +653,16 @@
         }
       });
     }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
-    sections.forEach(sec => spyObserver.observe(sec));
+    sections.forEach(sec => spy.observe(sec));
 
-    /* ======= 3D Tilt on Project Cards (no library) ======= */
+    /* ===== 3D Tilt (no lib) ===== */
     const tiltCards = document.querySelectorAll('.project-card[data-tilt]');
     tiltCards.forEach(card => {
-      const rectCache = { w: 0, h: 0 };
       function handleMove(e){
         const rect = card.getBoundingClientRect();
-        rectCache.w = rect.width; rectCache.h = rect.height;
-        const x = (e.clientX - rect.left) / rect.width;    // 0 to 1
-        const y = (e.clientY - rect.top)  / rect.height;   // 0 to 1
-        const rotateY = (x - 0.5) * 12; // max 12deg
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top)  / rect.height;
+        const rotateY = (x - 0.5) * 12;
         const rotateX = (0.5 - y) * 12;
         card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
       }
@@ -534,11 +670,63 @@
       card.addEventListener('mousemove', handleMove);
       card.addEventListener('mouseleave', resetTilt);
       card.addEventListener('touchmove', (e) => {
-        if(!e.touches[0]) return;
-        const t = e.touches[0];
+        if(!e.touches[0]) return; const t = e.touches[0];
         handleMove({ clientX: t.clientX, clientY: t.clientY });
       }, { passive: true });
       card.addEventListener('touchend', resetTilt);
+    });
+
+    /* ===== Typed-like headline (vanilla JS) ===== */
+    const typedEl = document.getElementById('typedText');
+    const roles = [
+      "Data Science Enthusiast",
+      "Machine Learning Practitioner",
+      "Flask + Python Developer",
+      "Power BI Storyteller"
+    ];
+    let roleIdx = 0, charIdx = 0, deleting = false, pause = 800;
+    function typeLoop(){
+      const current = roles[roleIdx];
+      if(!deleting){
+        typedEl.textContent = current.slice(0, ++charIdx);
+        if(charIdx === current.length){ deleting = true; setTimeout(typeLoop, pause); return; }
+      } else {
+        typedEl.textContent = current.slice(0, --charIdx);
+        if(charIdx === 0){ deleting = false; roleIdx = (roleIdx + 1) % roles.length; }
+      }
+      setTimeout(typeLoop, deleting ? 35 : 65);
+    }
+    typeLoop();
+
+    /* ===== Animate skill meters on view ===== */
+    const meters = document.querySelectorAll('.meter > span');
+    const meterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting){
+          const target = e.target.getAttribute('data-target');
+          requestAnimationFrame(() => { e.target.style.width = target + '%'; });
+          meterObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    meters.forEach(m => meterObs.observe(m));
+
+    /* ===== Contact form (no backend; safe) ===== */
+    const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+      if(!name || !email || !message){
+        formStatus.textContent = "Please fill all fields."; formStatus.className = "status err";
+        return;
+      }
+      // Simulate success
+      formStatus.textContent = "Thanks! Your message has been noted."; formStatus.className = "status ok";
+      form.reset();
+      setTimeout(() => { formStatus.textContent = ""; }, 2500);
     });
   </script>
 </body>

@@ -1,13 +1,17 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect,render_template_string
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import matplotlib
 matplotlib.use('Agg')  # For headless servers
 import matplotlib.pyplot as plt
+import yfinance as yf
+import matplotlib.pyplot as plt
+import io
+from io import BytesIO
 import os
 import re 
-
+import base64
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static'
 
@@ -74,6 +78,65 @@ def Netflix():
 @app.route('/AIML')
 def AIML():
     return render_template('comingSoon.html', page_name="AI/ML")
+
+
+
+@app.route('/DataScience')
+def DS():
+    return render_template('DS.html', page_name="AI/ML")
+
+@app.route('/DataScience')
+def data_science():
+    stock = "AAPL"  # Change ticker if needed
+    start_date = "2022-01-01"
+    end_date = "2023-12-31"
+
+    try:
+        data = yf.download(stock, start=start_date, end=end_date)
+        if data.empty:
+            raise ValueError("No data returned from yfinance.")
+    except Exception as e:
+        print("Failed to fetch stock data:", e)
+        data = None
+
+    # Generate plot if data is available
+    img_base64 = ""
+    if data is not None:
+        plt.figure(figsize=(10,5))
+        plt.plot(data['Close'], label='Closing Price')
+        plt.title(f'{stock} Closing Price Over Time')
+        plt.xlabel('Date')
+        plt.ylabel('Price(USD)')
+        plt.legend()
+        plt.grid(True)
+
+        buf = BytesIO()
+        plt.savefig(buf, format="png")
+        buf.seek(0)
+        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
+        buf.close()
+        plt.close()
+
+    # Data summary
+    summary = data.describe().to_html() if data is not None else "<p>Data not available</p>"
+
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>{stock} Stock Price</title>
+    </head>
+    <body>
+        <h1>{stock} Closing Price</h1>
+        <p>Data from {start_date} to {end_date}</p>
+        {'<img src="data:image/png;base64,' + img_base64 + '" alt="Stock Plot"/>' if img_base64 else '<p>Plot not available</p>'}
+        <h2>Data Summary</h2>
+        {summary}
+    </body>
+    </html>
+    """
+    return render_template_string(html_content)
+
 
 # ===================================================
 # ------------------- Book Scraping ----------------
@@ -264,8 +327,8 @@ def goodreads_pie():
 # ===================================================
 # ------------------- Yahoo Finance -----------------
 # ===================================================
-@app.route('/scrape_yahoo')
-def scrape_yahoo():
+# ---------------- Helper Function ----------------
+def get_yahoo_funds():
     url = "https://finance.yahoo.com/markets/mutualfunds/top/?start=0&count=25"
     headers = {'User-Agent': 'Mozilla/5.0'}
     response = requests.get(url, headers=headers)
@@ -294,9 +357,63 @@ def scrape_yahoo():
                 "Assets": assets,
                 "Yield": yield_
             })
+    return funds
 
-    # Pass dict list directly
+# ---------------- Routes ----------------
+@app.route('/scrape_yahoo')
+def scrape_yahoo():
+    funds = get_yahoo_funds()
     return render_template("yahoo.html", funds=funds)
+
+# ----------- Bar Chart Route -------------
+@app.route('/bar_chart_yahoo')
+def bar_chart_yahoo():
+    funds = get_yahoo_funds()  # function to fetch Yahoo mutual funds data
+    top_funds = sorted(funds, key=lambda x: x['Assets'], reverse=True)[:10]
+
+    names = [f['Name'] for f in top_funds]
+    assets = [f['Assets'] for f in top_funds]
+
+    plt.figure(figsize=(10,6))
+    plt.barh(names[::-1], assets[::-1], color='#00f0ff')
+    plt.xlabel('Assets (in Billions $)')
+    plt.title('Top 10 Mutual Funds by Assets')
+    plt.tight_layout()
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png', bbox_inches='tight', transparent=True)
+    img.seek(0)
+    plot_url = base64.b64encode(img.getvalue()).decode()
+    plt.close()
+
+    return render_template('yahoo_bar_chart.html', chart_url='data:image/png;base64,{}'.format(plot_url))
+
+
+
+# ----------- Pie Chart Route -------------
+@app.route('/pie_chart_yahoo')
+def pie_chart_yahoo():
+    funds = get_yahoo_funds()
+    # Convert Assets to float
+    for f in funds:
+        f['Assets_float'] = float(f['Assets'].replace(',','').replace('$',''))
+    top_funds = sorted(funds, key=lambda x: x['Assets_float'], reverse=True)[:10]
+
+    names = [f['Name'] for f in top_funds]
+    assets = [f['Assets_float'] for f in top_funds]
+
+    plt.figure(figsize=(8,8))
+    plt.pie(assets, labels=names, autopct='%1.1f%%', startangle=140, colors=plt.cm.tab20.colors)
+    plt.title('Top 10 Mutual Funds by Assets')
+    plt.tight_layout()
+
+    img = io.BytesIO()
+    plt.savefig(img, format='png', transparent=True)
+    img.seek(0)
+    plot_url = base64.b64encode(img.getvalue()).decode()
+    plt.close()
+
+    return render_template('yahoo_pie_chart.html', chart_url='data:image/png;base64,{}'.format(plot_url))
 
 # ===================================================
 # ------------------- IMDb Movies ------------------

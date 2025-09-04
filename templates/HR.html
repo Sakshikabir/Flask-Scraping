@@ -19,7 +19,6 @@
       overflow-x: hidden;
     }
 
-    /* Animated Particle Background */
     canvas#bg {
       position: fixed;
       inset: 0;
@@ -30,23 +29,20 @@
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
-      margin-top: 40px;
-      text-shadow: 0px 0px 10px #00fff2;
+      font-size: 2.6rem;
+      margin-top: 35px;
+      text-shadow: 0px 0px 14px #00fff2, 0 0 30px #0ff2ff22;
+      letter-spacing: 1.2px;
+      animation: glow 2s infinite alternate;
     }
-
-    p {
-      max-width: 850px;
-      margin: 20px auto;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: #d1d1d1;
+    @keyframes glow {
+      from { text-shadow: 0 0 14px #00fff2, 0 0 30px #0ff2ff22; }
+      to   { text-shadow: 0px 0px 30px #00fff2, 0 0 40px #0ff2ff77; }
     }
 
     .btn-container {
       margin: 25px 0;
     }
-
     .btn {
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       color: #fff;
@@ -62,21 +58,63 @@
       display: inline-block;
       box-shadow: 0px 0px 15px rgba(0,240,255,0.5);
     }
-
     .btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0px 0px 20px rgba(255,0,128,0.7);
+      transform: scale(1.11);
+      box-shadow: 0px 0px 22px rgba(255,0,128,0.7);
     }
 
     .image-container {
-      margin: 35px auto;
-      max-width: 1000px;
+      margin: 38px auto 14px;
+      max-width: 970px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 22px rgba(0, 255, 242, 0.45);
+      background: rgba(36,36,62,0.12);
+      padding: 18px 15px 8px 15px;
     }
-
     .image-container img {
       width: 100%;
       border-radius: 12px;
-      box-shadow: 0px 0px 22px rgba(0, 255, 242, 0.5);
+      box-shadow: 0px 0px 18px rgba(0, 255, 242, 0.44);
+    }
+
+    .quick-stats {
+      display: flex;
+      justify-content: center;
+      margin: 18px auto 32px;
+      gap: 30px;
+      max-width: 900px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      background: rgba(0,255,242,0.16);
+      border-radius: 14px;
+      box-shadow: 0 0 12px #00f0ff44;
+      padding: 20px 38px 18px;
+      min-width: 150px;
+      margin: 8px 0;
+      text-align: center;
+    }
+    .stat-value {
+      display: block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.3rem;
+      color: #00fff2;
+      text-shadow: 0 0 9px #00fff2;
+      margin-bottom: 2px;
+      letter-spacing: 1px;
+    }
+    .stat-label {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
+
+    p {
+      max-width: 850px;
+      margin: 16px auto 24px;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #d1d1d1;
     }
 
     .insights-container {
@@ -84,19 +122,60 @@
       margin: 30px auto;
       text-align: left;
       color: #d1d1d1;
+      background: rgba(36,36,62,0.20);
+      border-radius: 13px;
+      box-shadow: 0 0 18px #00f0ff26;
+      padding: 26px 32px 22px 32px;
     }
-
     .insights-container h2 {
       font-family: 'Orbitron', sans-serif;
       color: #00fff2;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
+      font-size: 1.6rem;
+      margin-bottom: 14px;
+      text-shadow: 0 0 5px #00fff275;
     }
-
     .insights-container ul {
       line-height: 1.6;
-      font-size: 1.15rem;
-      padding-left: 20px;
+      font-size: 1.13rem;
+      padding-left: 23px;
+    }
+    .insights-container li { margin-bottom: 8px; }
+
+    .feedback-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin: 38px auto 18px;
+      background: rgba(40,40,65,0.22);
+      border-radius: 22px;
+      padding: 13px 32px 11px 28px;
+      box-shadow: 0 0 15px #00f0ff33;
+      font-size: 1.1rem;
+      max-width: 350px;
+      color: #e3e3e3;
+    }
+    .feedback-btn {
+      background: linear-gradient(135deg, #22f5ee, #ff0080);
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      color: #fff;
+      font-size: 1.35rem;
+      cursor: pointer;
+      margin: 0 4px;
+      box-shadow: 0px 0px 8px #00fff2;
+      transition: transform 0.18s, background 0.15s;
+      outline: none;
+    }
+    .feedback-btn:hover { transform: scale(1.19); background: #fff; color: #ff0080; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .quick-stats { flex-direction: column; align-items: center; gap: 18px; }
+      .insights-container { padding: 20px 10px 17px 10px; }
+      .image-container { padding: 10px 3px 7px 3px;}
     }
   </style>
 </head>
@@ -104,38 +183,50 @@
 
   <!-- Animated Background -->
   <canvas id="bg" aria-hidden="true"></canvas>
-
   <h1>HR Analytics Dashboard</h1>
-  <p>
-    This dashboard provides insights into workforce trends such as education levels, gender distribution, 
-    income comparisons, and department performance. The visualizations help identify patterns in 
-    employee demographics, job roles, and overall HR metrics for better decision-making.
-  </p>
-
+  
   <div class="btn-container">
     <a href="https://www.kaggle.com/datasets/saadharoon27/hr-analytics-dataset" class="btn">Go to Dataset</a>
     <a href="/PowerBI" class="btn">Back</a>
+    <a href="/export/insights.pdf" class="btn">Download Insights (PDF)</a>
   </div>
 
   <div class="image-container">
     <img src="static/HR DashBoARD.png" alt="HR Analytics Dashboard">
   </div>
 
-  <!-- Insights Section -->
-  <div class="insights-container">
-    <h2>Key Insights from Dashboard:</h2>
-    <ul>
-      <li><strong>Education Levels:</strong> Majority of employees hold a Bachelor's degree, followed by a significant portion with a Master's.</li>
-      <li><strong>Gender Distribution:</strong> Workforce is fairly balanced, with a slightly higher number of male employees.</li>
-      <li><strong>Income Analysis:</strong> Average monthly income is higher for employees in technical roles and departments like Research & Development.</li>
-      <li><strong>Department Performance:</strong> Sales and R&D departments show the highest performance scores and engagement levels.</li>
-      <li><strong>Work Experience:</strong> Employees with more experience tend to occupy senior positions and have higher satisfaction levels.</li>
-      <li><strong>Attrition Patterns:</strong> Attrition is higher among employees with less than 3 years of experience, particularly in sales.</li>
-      <li><strong>Job Role Distribution:</strong> Certain roles, like managers and senior engineers, are concentrated in specific departments, influencing overall productivity.</li>
-    </ul>
+  <!-- QUICK STATS KPI SECTION MOVED BELOW IMAGE -->
+  <div class="quick-stats">
+    <div class="stat">
+      <span class="stat-value" id="stat-attrition">0</span>
+      <span class="stat-label">Attrition %</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-employees">0</span>
+      <span class="stat-label">Employees</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value" id="stat-income">0</span>
+      <span class="stat-label">Avg. Income (₹)</span>
+    </div>
   </div>
 
-  <!-- Scripts (same particle effect as homepage) -->
+  <p>
+    This dashboard provides insights into workforce trends such as education levels, gender distribution, 
+    income comparisons, and department performance. The visualizations help identify patterns in 
+    employee demographics, job roles, and overall HR metrics for better decision-making.
+  </p>
+
+
+
+  <!-- Feedback box -->
+  <div class="feedback-box">
+    <span>Was this dashboard helpful?</span>
+    <button class="feedback-btn" aria-label="Helpful">👍</button>
+    <button class="feedback-btn" aria-label="Not helpful">👎</button>
+  </div>
+
+  <!-- Background Particle Animation -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
@@ -176,7 +267,6 @@
       }
     }
     for (let i = 0; i < NUM; i++) particles.push(new Particle());
-
     function connect() {
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
@@ -203,5 +293,27 @@
     animate();
   </script>
 
+  <!-- Animated counter for stats -->
+  <script>
+    function animateStat(id, end, duration = 1200, prefix = '', suffix = '') {
+      const el = document.getElementById(id);
+      let start = 0;
+      let startTime = null;
+      function animateStep(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        el.textContent = prefix + value + suffix;
+        if (progress < 1) requestAnimationFrame(animateStep);
+        else el.textContent = prefix + end + suffix;
+      }
+      requestAnimationFrame(animateStep);
+    }
+    window.onload = () => {
+      animateStat('stat-attrition', 12, 900, '', '%');
+      animateStat('stat-employees', 457, 1500, '', '');
+      animateStat('stat-income', 48200, 1700, '', '');
+    }
+  </script>
 </body>
 </html>

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Covid-19 Dashboard | Sakshi Kabir</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Rajdhani', sans-serif;
       color: #ffffff;
@@ -60,12 +67,12 @@
       transition: all 0.3s ease;
       text-decoration: none;
       display: inline-block;
-      box-shadow: 0px 0px 15px rgba(0,240,255,0.5);
+      box-shadow: 0px 0px 15px rgba(0, 240, 255, 0.5);
     }
 
     .btn:hover {
       transform: scale(1.1);
-      box-shadow: 0px 0px 20px rgba(255,0,128,0.7);
+      box-shadow: 0px 0px 20px rgba(255, 0, 128, 0.7);
     }
 
     .image-container {
@@ -78,17 +85,62 @@
       border-radius: 12px;
       box-shadow: 0px 0px 22px rgba(0, 255, 242, 0.5);
     }
+
+    /* Quick Stats Buttons below image */
+    .quick-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      max-width: 900px;
+      margin: 16px auto 36px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      background: rgba(0, 255, 242, 0.16);
+      border-radius: 14px;
+      box-shadow: 0 0 12px #00f0ff44;
+      padding: 18px 40px;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.3rem;
+      color: #00fff2;
+      text-shadow: 0 0 9px #00fff2;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    .stat-label {
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .quick-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .btn-container {
+        margin-bottom: 12px;
+      }
+    }
   </style>
 </head>
 <body>
-
   <!-- Animated Background -->
   <canvas id="bg" aria-hidden="true"></canvas>
 
   <h1>Covid-19 Dashboard</h1>
   <p>
-    This dataset provides comprehensive insights into COVID-19 trends worldwide, including case counts, recoveries, fatalities, and vaccination progress.
-    It enables detailed analysis for forecasting, pattern recognition, and global response evaluation.
+    This dataset provides comprehensive insights into COVID-19 trends worldwide, including case counts,
+    recoveries, fatalities, and vaccination progress. It enables detailed analysis for forecasting, pattern
+    recognition, and global response evaluation.
   </p>
 
   <div class="btn-container">
@@ -97,14 +149,30 @@
   </div>
 
   <div class="image-container">
-    <img src="static/Screenshot 2025-08-28 133108.png" alt="Covid Dashboard">
+    <img src="static/Screenshot 2025-08-28 133108.png" alt="Covid Dashboard" />
   </div>
 
-  <!-- Scripts (same particle effect as homepage) -->
+  <!-- Quick Stats Buttons below image -->
+  <div class="quick-stats">
+    <div class="stat">
+      <div class="stat-value" id="stat-cases">0</div>
+      <div class="stat-label">Total Cases</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="stat-recovered">0</div>
+      <div class="stat-label">Recovered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="stat-fatalities">0</div>
+      <div class="stat-label">Fatalities</div>
+    </div>
+  </div>
+
+  <!-- Particle animation script -->
   <script>
     const canvas = document.getElementById('bg');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas(){
+    function resizeCanvas() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.style.width = window.innerWidth + 'px';
       canvas.style.height = window.innerHeight + 'px';
@@ -118,9 +186,11 @@
     const particles = [];
     const NUM = 80;
     class Particle {
-      constructor() { this.reset(true); }
-      reset(randomXY=false){
-        this.x = randomXY ? Math.random() * canvas.width : (Math.random() < .5 ? 0 : canvas.width);
+      constructor() {
+        this.reset(true);
+      }
+      reset(randomXY = false) {
+        this.x = randomXY ? Math.random() * canvas.width : Math.random() < 0.5 ? 0 : canvas.width;
         this.y = randomXY ? Math.random() * canvas.height : Math.random() * canvas.height;
         this.radius = 2;
         this.vx = (Math.random() - 0.5) * 1.2;
@@ -161,12 +231,34 @@
     }
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
+      particles.forEach((p) => p.update());
       connect();
       requestAnimationFrame(animate);
     }
     animate();
   </script>
 
+  <!-- Animated counters for quick stats -->
+  <script>
+    function animateStat(id, end, duration = 1500) {
+      const el = document.getElementById(id);
+      let start = 0;
+      let startTime = null;
+      function animateStep(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        el.textContent = value.toLocaleString();
+        if (progress < 1) requestAnimationFrame(animateStep);
+        else el.textContent = end.toLocaleString();
+      }
+      requestAnimationFrame(animateStep);
+    }
+    window.onload = () => {
+      animateStat('stat-cases', 12345678);
+      animateStat('stat-recovered', 10987654);
+      animateStat('stat-fatalities', 234567);
+    };
+  </script>
 </body>
 </html>

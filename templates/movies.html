@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>📽️ Top IMDb Movies - Sakshi Kabir</title>
+  <title>🎬 Top IMDb Movies - Sakshi Kabir</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     * { box-sizing: border-box; margin:0; padding:0; }
@@ -15,66 +15,50 @@
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #e0e0e0;
       min-height: 100vh;
+      text-align: center;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
-    /* Animated Background */
-    canvas#bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
-
-    /* Header */
     header {
       padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       backdrop-filter: blur(6px);
       border-bottom: 1px solid rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
-    header .logo {
+    header h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      color: #00f0ff;
-      letter-spacing: 2px;
-    }
-    header nav {
-      display: flex;
-      gap: 20px;
-    }
-    header nav a {
-      color: #eee;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    header nav a:hover {
-      color: #ff0080;
-    }
-
-    main {
-      flex: 1;
-      max-width: 1150px;
-      margin: 60px auto;
-      padding: 30px;
-      text-align: center;
-    }
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
-      margin-bottom: 30px;
+      font-size: 2.5rem;
       color: #00f0ff;
       text-shadow: 0 0 8px rgba(0,240,255,0.6);
+      margin-bottom: 15px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(135deg, #00f0ff, #ff0080);
+      box-shadow: 0 0 10px rgba(0,240,255,0.6);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(0,240,255,0.9);
     }
 
     .table-container {
@@ -87,18 +71,17 @@
       box-shadow: 0 0 20px rgba(0,240,255,0.4);
     }
     table {
-      border-collapse: collapse;
       width: 100%;
+      border-collapse: collapse;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
       overflow: hidden;
     }
     th, td {
+      padding: 12px;
       border: 1px solid rgba(255,255,255,0.2);
-      padding: 10px 14px;
       text-align: left;
       color: #e0e0e0;
-      font-size: 0.95rem;
     }
     th {
       background: rgba(0,240,255,0.2);
@@ -106,161 +89,55 @@
       font-weight: 700;
       text-transform: uppercase;
     }
-
-    .buttons {
-      margin: 25px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-    .buttons a, .buttons button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #fff;
-      background: linear-gradient(135deg, #00f0ff, #ff0080);
-      box-shadow: 0 0 10px rgba(0,240,255,0.6);
-      transition: 0.3s;
-      cursor: pointer;
-    }
-    .buttons a:hover, .buttons button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 15px rgba(0,240,255,0.9);
-    }
-    .buttons button[disabled] {
-      opacity: 0.6;
-      cursor: not-allowed;
+    tr:hover td {
+      background: rgba(0,240,255,0.1);
     }
 
     footer {
       text-align: center;
       background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(10px);
-      padding: 20px;
+      padding: 15px;
       font-size: 14px;
       color: #aaa;
       border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
-  <!-- Animated Background -->
-  <canvas id="bg"></canvas>
-
-  <!-- Header -->
   <header>
-    <div class="logo">Sakshi Kabir</div>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/bar_movies">Bar Chart</a>
-      <a href="/pie_movies">Pie Chart</a>
-      <a href="https://github.com/Sakshikabir" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/sakshi-kabir-a0ab81254/" target="_blank">LinkedIn</a>
-    </nav>
+    <h1>🎬 Top IMDb Movies</h1>
+    <div class="btn-container">
+      <a href="/" class="btn">⬅ Back to Home</a>
+      <a href="/bar_movies" class="btn">📊 View Bar Chart</a>
+      <a href="/pie_movies" class="btn">🥧 View Pie Chart</a>
+    </div>
   </header>
 
-  <main>
-    <h2>🎬 Top 10 IMDb Movies</h2>
-
-    <div class="buttons">
-      <a href="/bar_movies">📊 View Bar Chart</a>
-      <a href="/pie_movies">🥧 View Pie Chart</a>
-      <a href="/">⬅ Back to Home</a>
-    </div>
-
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Movie Title</th>
-            <th>Rating</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for movie in movies %}
-          <tr>
-            <td>{{ loop.index }}</td>
-            <td>{{ movie['title'] }}</td>
-            <td>{{ movie['rating'] }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+  <main class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Movie Title</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for movie in movies %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ movie['title'] }}</td>
+          <td>{{ movie['rating'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </main>
 
   <footer>
     © 2025 Data Analytics Trainee | Built with ❤️ by Sakshi Kabir
   </footer>
-
-  <script>
-    const canvas = document.getElementById('bg');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    let particles = [];
-    const numParticles = 80;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.radius = 2;
-        this.vx = (Math.random() - 0.5) * 1;
-        this.vy = (Math.random() - 0.5) * 1;
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
-        ctx.fillStyle = '#00f0ff';
-        ctx.fill();
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if(this.x<0||this.x>canvas.width) this.vx*=-1;
-        if(this.y<0||this.y>canvas.height) this.vy*=-1;
-        this.draw();
-      }
-    }
-
-    for(let i=0;i<numParticles;i++){particles.push(new Particle());}
-
-    function connect(){
-      for(let a=0;a<particles.length;a++){
-        for(let b=a;b<particles.length;b++){
-          let dx = particles[a].x - particles[b].x;
-          let dy = particles[a].y - particles[b].y;
-          let distance = Math.sqrt(dx*dx + dy*dy);
-          if(distance<120){
-            ctx.strokeStyle = 'rgba(0,240,255,0.2)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(particles[a].x,particles[a].y);
-            ctx.lineTo(particles[b].x,particles[b].y);
-            ctx.stroke();
-          }
-        }
-      }
-    }
-
-    function animate(){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      particles.forEach(p=>p.update());
-      connect();
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener('resize', ()=> {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  </script>
 </body>
 </html>
