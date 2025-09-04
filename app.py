@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')  # For headless servers
 import matplotlib.pyplot as plt
-import yfinance as yf
+# import yfinance as yf
 import matplotlib.pyplot as plt
 import io
 from io import BytesIO

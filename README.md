@@ -5,4 +5,3 @@ pandas
 requests
 matplotlib
 aiohttp
-yfinance
