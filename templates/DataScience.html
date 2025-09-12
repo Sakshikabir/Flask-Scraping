@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Insight Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Feather Icons CDN -->
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --bg-main: #f5f7fa;
+      --bg-card: #ecf0f3;
+      --accent-blue: #1976d2;
+      --accent-violet: #ba68c8;
+      --accent-green: #43a047;
+      --shadow-light: #ffffff 6px 6px 16px 0, #cbced1 -6px -6px 16px 0;
+      --shadow-deep: 8px 8px 20px #bfc4ca, -8px -8px 20px #fff;
+      --text-primary: #34375d;
+      --text-secondary: #6c7a89;
+      --font-regular: 'Fira Sans', Arial, sans-serif;
+      --font-code: 'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-main);
+      color: var(--text-primary);
+      font-family: var(--font-regular);
+      margin: 0;
+      padding: 0;
+    }
+    .notebookContainer{
+      width: 100%;
+      min-height: 800px;
+      height: 100%;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 1.5rem;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-light);
+      border-radius: 0 0 24px 24px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      letter-spacing: 1.5px;
+    }
+    .nav {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav a:hover {
+      color: var(--accent-violet);
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      letter-spacing: 1.2px;
+      margin-bottom: 0.5rem;
+    }
+    .hero-high {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-violet));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline;
+      font-weight: 700;
+    }
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .features-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      justify-content: space-around;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      box-shadow: var(--shadow-light);
+      flex: 1 1 320px;
+      min-width: 320px;
+      max-width: 385px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      transition: box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow-deep);
+    }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 1rem;
+      color: var(--accent-blue);
+    }
+    .feature-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--accent-blue);
+    }
+    .feature-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .code-block {
+      width: 100%;
+      background: #20252b;
+      color: #e3f2fd;
+      font-family: var(--font-code);
+      font-size: 0.98rem;
+      padding: 1.2rem 1rem 1rem 1rem;
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      box-shadow: 2px 2px 16px #bfc4ca inset;
+      overflow-x: auto;
+    }
+    .tech-stack {
+      display: flex;
+      justify-content: center;
+      gap: 2.8rem;
+      padding: 2.5rem 0 1.5rem;
+    }
+    .tech-logo {
+      height: 52px;
+      filter: grayscale(0.15) brightness(1.1);
+    }
+    .footer {
+      padding: 2rem 1rem 1rem;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    @media (max-width: 850px) {
+      .features-section { flex-direction: column; align-items: center; gap: 2rem; }
+      .feature-card { width: 100%; max-width: 480px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo"><i data-feather="activity"></i>&nbsp;Stock Insight</div>
+    <nav class="nav">
+      <a href="#overview">Overview</a>
+      <a href="#fetch">Fetch Data</a>
+      <a href="#compare">Compare</a>
+      <a href="#realtime">Real-Time</a>
+      <a href="#export">Export</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="overview">
+    <h1 class="hero-title">Smarter <span class="hero-high">Market Analysis</span></h1>
+    <p class="hero-desc">
+      Effortlessly gather, analyze, and visualize stock market performance using modern Python tools.<br>
+      Unlock trends, compare assets, monitor live updates, and save your insights.
+    </p>
+  </section>
+
+  <section class="features-section" id="fetch" style="display :none">
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="download"></i></div>
+      <div class="feature-title">Quick Data Pull</div>
+      <div class="feature-desc">Retrieve historical price records for major stocks in seconds with <strong>yfinance</strong> and <strong>pandas</strong>.</div>
+      <pre class="code-block">
+import yfinance as yf
+data = yf.download("MSFT", start="2023-01-01", end="2024-11-01")
+      </pre>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="search"></i></div>
+      <div class="feature-title">Rapid Data Walkthrough</div>
+      <div class="feature-desc">Inspect and summarize all stock fields before deeper analysis using user-friendly <strong>pandas</strong> calls.</div>
+      <pre class="code-block">
+print(data.info())
+print(data.head(), data.tail())
+print(data.describe())
+      </pre>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="bar-chart-2"></i></div>
+      <div class="feature-title">Enhanced Charting</div>
+      <div class="feature-desc">Present closing prices and calculated averages in visually compelling line charts for clearer interpretations.</div>
+      <pre class="code-block">
+import matplotlib.pyplot as plt
+data['avg20'] = data['Close'].rolling(20).mean()
+plt.plot(data['Close'], label="Close")
+plt.plot(data['avg20'], label="20d MA")
+plt.legend(); plt.show()
+      </pre>
+    </div>
+  </section>
+
+  <section class="features-section" id="compare" style="display :none">
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="layers"></i></div>
+      <div class="feature-title">Cross-Symbol Comparison</div>
+      <div class="feature-desc">Visualize multiple stocks on the same timeline for quick peer comparison and correlation insights.</div>
+      <pre class="code-block">
+tickers = ['MSFT', 'AAPL', 'NVDA']
+multi = yf.download(tickers, start="2023-01-01")["Close"]
+multi.plot(figsize=(14,6)); plt.show()
+      </pre>
+    </div>
+  </section>
+
+  <section class="features-section" id="realtime" style="display :none">
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="clock"></i></div>
+      <div class="feature-title">Live Price Tracking</div>
+      <div class="feature-desc">Monitor minute-by-minute updates for your favorite stock and display live dashboards easily.</div>
+      <pre class="code-block">
+import time
+ticker = yf.Ticker('TSLA')
+while True:
+    latest = ticker.history(period="1d", interval="1m")
+    print(latest['Close'][-1])
+    time.sleep(60)
+      </pre>
+    </div>
+  </section>
+
+  <section class="features-section" id="export" style="display :none">
+    <div class="feature-card">
+      <div class="feature-icon"><i data-feather="save"></i></div>
+      <div class="feature-title">Export Results</div>
+      <div class="feature-desc">Save your findings as CSV or Excel with one-liners for onward research or reporting.</div>
+      <pre class="code-block">
+data.to_csv("stock_data.csv")
+multi.to_excel("multi_stock.xlsx")
+      </pre>
+    </div>
+  </section>
+  <iframe src ="/static/notebooks/_Time_Series.html" class="notebookContainer">
+
+  </iframe>
+  <section class="tech-stack">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/python.svg" class="tech-logo" alt="Python">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/pandas.svg" class="tech-logo" alt="Pandas">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/yfinance.svg" class="tech-logo" alt="yfinance">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/matplotlib.svg" class="tech-logo" alt="Matplotlib">
+  </section>
+
+  <div class="footer">
+    © 2025 Stock Insight Studio &middot; Powered by <span style="color:var(--accent-violet);font-weight:600;">Python</span>
+  </div>
+
+  <script>feather.replace()</script>
+</body>
+</html>

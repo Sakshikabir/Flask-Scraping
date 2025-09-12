@@ -414,33 +414,108 @@
   </section>
 
   <!-- ===== CodroidHub ===== -->
-  <section id="aboutCodroidhub">
-    <div class="container">
-      <h2 class="fade-up">About CodroidHub</h2>
-      <div class="box fade-up">
-        <div>
-          <p class="cdh-title">Empowering learners with practical, industry-focused skills</p>
-          <p>
-            CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
-            software development, data science, and emerging technologies. Our mission is to bridge the gap
-            between theory and real-world application through hands-on training, projects, and mentorship.
-          </p>
-          <ul class="cdh-points">
-            <li>Real-world projects & mentorship</li>
-            <li>AI/ML, Data Analytics, and full-stack development</li>
-            <li>Career guidance & portfolio building</li>
-          </ul>
-          <!-- Keep your original route intact -->
-          <div style="margin-top:14px;">
-            <a href="/aboutCodroid" class="btn">Know More</a>
-          </div>
-        </div>
-        <div class="cdh-side">
-          <span class="cdh-badge">CodroidHub • Since 2023</span>
-        </div>
+<section id="aboutCodroidhub">
+  <div class="container">
+    <h2 class="fade-up">About CodroidHub</h2>
+    <div class="cdh-card fade-up">
+      <div class="cdh-content">
+        <p class="cdh-title">Empowering learners with practical, industry-focused skills</p>
+        <p>
+          CodroidHub is a vibrant community dedicated to empowering learners with practical skills in
+          software development, data science, and emerging technologies. Our mission is to bridge the gap
+          between theory and real-world application through hands-on training, projects, and mentorship.
+        </p>
+        <ul class="cdh-points">
+          <li>Real-world projects & mentorship</li>
+          <li>AI/ML, Data Analytics, and full-stack development</li>
+          <li>Career guidance & portfolio building</li>
+        </ul>
+        <a href="/aboutCodroid" class="btn">Know More</a>
+      </div>
+      <div class="cdh-badge-wrapper">
+        <span class="cdh-badge">CodroidHub • Since 2019</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<style>
+/* CodroidHub Upgraded Styles */
+.cdh-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: linear-gradient(135deg, rgba(0,240,255,0.08), rgba(255,0,128,0.08));
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.cdh-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 48px rgba(0,240,255,0.45), 0 12px 36px rgba(255,0,128,0.3);
+}
+
+.cdh-content {
+  text-align: left;
+  z-index: 2;
+}
+
+.cdh-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: #00f0ff;
+  margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(0,240,255,0.7);
+}
+
+.cdh-points {
+  margin: 16px 0;
+  padding-left: 20px;
+}
+.cdh-points li {
+  color: #ddd;
+  margin-bottom: 8px;
+  position: relative;
+}
+.cdh-points li::before {
+  content: '✔';
+  position: absolute;
+  left: -20px;
+  color: #31d0aa;
+  font-weight: bold;
+}
+
+.cdh-badge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+.cdh-badge {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #00f0ff, #ff0080);
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(0,240,255,0.6);
+}
+
+/* Responsive */
+@media (min-width: 900px) {
+  .cdh-card {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cdh-content { flex: 1; padding-right: 24px; }
+  .cdh-badge-wrapper { margin-top: 0; }
+}
+</style>
+
 
   <!-- ===== Projects ===== -->
   <section id="projects">
@@ -503,52 +578,36 @@
   </section>
 
   <!-- ===== Blogs ===== -->
-  <section id="blogs">
-    <div class="container">
-      <h2 class="fade-up">Blogs</h2>
-      <p class="blog-intro fade-up">I write about Data Science, Machine Learning, and my training journey.  
-        Check out my blogs for hands-on guides, learning notes, and project breakdowns.</p>
+<section id="blogs">
+  <div class="container">
+    <h2 class="fade-up">Blogs</h2>
+    <p class="blog-intro fade-up">
+      I write about Data Science, Machine Learning, and my training journey.  
+      Check out my blogs for hands-on guides, learning notes, and project breakdowns.
+    </p>
 
-      <!-- Preview Cards (static placeholders) -->
-      <div class="blog-grid">
-        <article class="blog-card fade-up">
-          <img class="blog-thumb" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Laptop and code" loading="lazy">
-          <div class="blog-body">
-            <div class="blog-title">Getting Started with Flask + Jinja</div>
-            <div class="blog-meta">Guide • 5 min read</div>
-            <p>How I structure routes, templates, and static assets to ship projects quickly.</p>
-            <!-- keep your original route to blogs -->
-            <a class="btn-small" href="/blogs">Read More</a>
-          </div>
-        </article>
-
-        <article class="blog-card fade-up">
-          <img class="blog-thumb" src="https://images.unsplash.com/photo-1581091215367-59ab6b4b1b83?q=80&w=1200&auto=format&fit=crop" alt="Data visualization dashboard" loading="lazy">
-          <div class="blog-body">
-            <div class="blog-title">Power BI Storytelling Tips</div>
-            <div class="blog-meta">Tips • 4 min read</div>
-            <p>My favorite visuals and KPI patterns that make dashboards pop.</p>
-            <a class="btn-small" href="/blogs">Read More</a>
-          </div>
-        </article>
-
-        <article class="blog-card fade-up">
-          <img class="blog-thumb" src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Python code" loading="lazy">
-          <div class="blog-body">
-            <div class="blog-title">Scraping Ethically with Python</div>
-            <div class="blog-meta">Best Practices • 6 min read</div>
-            <p>Respect robots.txt, add delays, and structure pipelines cleanly.</p>
-            <a class="btn-small" href="/blogs">Read More</a>
-          </div>
-        </article>
-      </div>
-
-      <div style="margin-top: 18px;" class="fade-up">
-        <!-- keep your original CTA/link intact -->
-        <a class="btn" href="/blogs">View All Blogs</a>
-      </div>
+    <!-- Dynamic Blog Cards -->
+    <div class="blog-grid">
+      {% for blog in blogs %}
+      <article class="blog-card fade-up">
+        <img class="blog-thumb" src="{{ blog.img }}" alt="{{ blog.title }}" loading="lazy">
+        <div class="blog-body">
+          <div class="blog-title">{{ blog.title }}</div>
+          <div class="blog-meta">{{ blog.meta }}</div>
+          <p>{{ blog.desc }}</p>
+          <a class="btn-small" href="{{ blog.url }}">Read More</a>
+        </div>
+      </article>
+      {% endfor %}
     </div>
-  </section>
+
+    <!-- CTA / View All Blogs -->
+    <div style="margin-top: 18px;" class="fade-up">
+      <a class="btn" href="/blogs">View All Blogs</a>
+    </div>
+  </div>
+</section>
+
 
 <!-- ===== Contact ===== -->
 <section id="contact">

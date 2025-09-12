@@ -55,9 +55,9 @@ def aboutCodroid():
 def blogs():
     return render_template('blogs.html')
 
-@app.route('/dataScience')
+@app.route('/DataScience')
 def dataScience():
-    return render_template('scraping.html')
+    return render_template('DataScience.html')
 
 @app.route('/PowerBI')
 def powerBI():
@@ -81,61 +81,6 @@ def AIML():
 
 
 
-@app.route('/DataScience')
-def DS():
-    return render_template('DS.html', page_name="AI/ML")
-
-@app.route('/DataScience')
-def data_science():
-    stock = "AAPL"  # Change ticker if needed
-    start_date = "2022-01-01"
-    end_date = "2023-12-31"
-
-    try:
-        data = yf.download(stock, start=start_date, end=end_date)
-        if data.empty:
-            raise ValueError("No data returned from yfinance.")
-    except Exception as e:
-        print("Failed to fetch stock data:", e)
-        data = None
-
-    # Generate plot if data is available
-    img_base64 = ""
-    if data is not None:
-        plt.figure(figsize=(10,5))
-        plt.plot(data['Close'], label='Closing Price')
-        plt.title(f'{stock} Closing Price Over Time')
-        plt.xlabel('Date')
-        plt.ylabel('Price(USD)')
-        plt.legend()
-        plt.grid(True)
-
-        buf = BytesIO()
-        plt.savefig(buf, format="png")
-        buf.seek(0)
-        img_base64 = base64.b64encode(buf.read()).decode('utf-8')
-        buf.close()
-        plt.close()
-
-    # Data summary
-    summary = data.describe().to_html() if data is not None else "<p>Data not available</p>"
-
-    html_content = f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>{stock} Stock Price</title>
-    </head>
-    <body>
-        <h1>{stock} Closing Price</h1>
-        <p>Data from {start_date} to {end_date}</p>
-        {'<img src="data:image/png;base64,' + img_base64 + '" alt="Stock Plot"/>' if img_base64 else '<p>Plot not available</p>'}
-        <h2>Data Summary</h2>
-        {summary}
-    </body>
-    </html>
-    """
-    return render_template_string(html_content)
 
 
 # ===================================================
