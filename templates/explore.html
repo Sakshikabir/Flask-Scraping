@@ -73,9 +73,52 @@
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 38px;
-      margin-bottom: 50px;
+      margin-bottom: 25px;
       color: #00f0ff;
       text-shadow: 0 0 8px rgba(0,240,255,0.6);
+    }
+
+    /* Intro Text */
+    .intro {
+      max-width: 750px;
+      margin: 0 auto 40px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+    /* Extra Info Section */
+    .explore-info {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 50px;
+      text-align: left;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .explore-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #00f0ff;
+      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+    }
+    .explore-info ul {
+      margin: 15px 0;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    .explore-info li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #ddd;
+    }
+    .explore-info p {
+      font-size: 15px;
+      color: #bbb;
+      line-height: 1.6;
+      margin-top: 10px;
     }
 
     /* Cards */
@@ -84,53 +127,96 @@
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
       width: 100%;
+      perspective: 1000px;
     }
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 35px 25px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      width: 100%;
+      height: 320px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
     }
     .card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(0,240,255,0.6);
+      transform: rotateY(180deg);
     }
-    .card img {
-      width: 90px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 10px rgba(0,240,255,0.7));
-      transition: transform 0.3s ease;
+    .card-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backface-visibility: hidden;
+      padding: 25px;
+      text-align: center;
     }
-    .card:hover img { transform: scale(1.1); }
-    .card h3 {
-      font-size: 22px;
+
+    /* Front */
+    .card-front img {
+      width: 80px;
       margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px rgba(0,240,255,0.7));
+    }
+    .card-front h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
       color: #00f0ff;
       font-family: 'Orbitron', sans-serif;
     }
-    .card p {
-      font-size: 15px;
+    .card-front p {
+      font-size: 14px;
       color: #ddd;
-      margin-bottom: 22px;
       line-height: 1.6;
     }
-    .card a {
+
+    /* Back */
+    .card-back {
+      transform: rotateY(180deg);
+      background: rgba(0, 240, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-back a, .card-back button {
+      margin-top: 15px;
       text-decoration: none;
       color: #fff;
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: 600;
-      display: inline-block;
+      border: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
-    .card a:hover {
+    .card-back a:hover, .card-back button:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 14px rgba(0,240,255,0.6);
     }
+    .card-back button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Badge Labels */
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 6px rgba(0,240,255,0.6);
+      z-index: 2;
+    }
+    .badge.new { background: linear-gradient(135deg, #ff0080, #ff5f5f); }
+    .badge.upcoming { background: linear-gradient(135deg, #888, #555); }
 
     /* Footer */
     footer {
@@ -145,8 +231,10 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      h1 { font-size: 28px; margin-bottom: 30px; }
+      h1 { font-size: 28px; margin-bottom: 20px; }
       header nav { gap: 12px; font-size: 14px; }
+      .intro { font-size: 15px; margin-bottom: 30px; }
+      .card { height: 280px; }
     }
   </style>
 </head>
@@ -170,33 +258,105 @@
   <!-- Explore Page -->
   <main>
     <h1>Explore More</h1>
+    <p class="intro">
+      Here you’ll find resources, tutorials, and projects that I’m working on. 
+      Stay updated with the latest additions and upcoming topics in 
+      <span style="color:#ff0080; font-weight:600;">Data, AI, and Analytics.</span>
+    </p>
+
+    <section class="explore-info">
+  <h2>What You’ll Discover ✨</h2>
+  <ul>
+    <li>🔍 <b>Web Scraping</b> – Automate data collection from websites with Python and tools like BeautifulSoup & Selenium.</li>
+    <li>💻 <b>Scraping with API</b> – Fetch data efficiently using APIs and process JSON responses with Python.</li>
+    <li>📊 <b>Data Science</b> – Learn analysis, visualization, and predictive modeling techniques.</li>
+    <li>📈 <b>Power BI</b> – Create interactive dashboards and turn raw data into insights.</li>
+    <li>🤖 <b>AI & Machine Learning</b> – Explore algorithms and real-world projects (coming soon).</li>
+  </ul>
+  <p>
+    This section is updated regularly with new content. Whether you’re a beginner or exploring advanced concepts, 
+    you’ll find step-by-step guides, code snippets, and project ideas to level up your skills.
+  </p>
+</section>
+
+
     <div class="cards-container">
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/4423/4423446.png" alt="Web Scraping Icon">
-        <h3>Web Scraping</h3>
-        <p>Learn how to collect and analyze data from websites using Python and automation tools.</p>
-        <a href="/scraping">Learn More</a>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data Science Icon">
-        <h3>Data Science</h3>
-        <p>Master data analysis, visualization, and machine learning techniques to solve real-world problems.</p>
-        <a href="/DataScience">Learn More</a>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" alt="Power BI Icon">
-        <h3>Power BI</h3>
-        <p>Create powerful, interactive dashboards and reports to turn raw data into insights.</p>
-        <a href="/PowerBI">Learn More</a>
-      </div>
-      <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="AI/ML Icon">
-        <h3>AI / Machine Learning</h3>
-        <p>Explore algorithms and techniques that enable machines to learn and make decisions.</p>
-        <button disabled style="opacity:0.6; cursor:not-allowed;">Coming Soon</button>
-      </div>
+  <!-- Web Scraping -->
+  <div class="card">
+    <span class="badge">Updated</span>
+    <div class="card-inner card-front">
+      <img src="https://cdn-icons-png.flaticon.com/512/4423/4423446.png" alt="Web Scraping Icon">
+      <h3>Web Scraping</h3>
+      <p>Learn how to collect and analyze data from websites using Python and automation tools.</p>
     </div>
-  </main>
+    <div class="card-inner card-back">
+      <h3>Get Started 🚀</h3>
+      <p>Hands-on tutorials with Python, BeautifulSoup & Selenium.</p>
+      <a href="/scraping">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Data Science -->
+  <div class="card">
+    <span class="badge new">New</span>
+    <div class="card-inner card-front">
+      <img src="https://cdn-icons-png.flaticon.com/512/1163/1163624.png" alt="Data Science Icon">
+      <h3>Data Science</h3>
+      <p>Master data analysis, visualization, and machine learning techniques.</p>
+    </div>
+    <div class="card-inner card-back">
+      <h3>Deep Dive 📊</h3>
+      <p>From Pandas to ML Models — step by step guides.</p>
+      <a href="/DataScience">Learn More</a>
+    </div>
+  </div>
+
+  <!-- Power BI -->
+  <div class="card">
+    <span class="badge">Updated</span>
+    <div class="card-inner card-front">
+      <img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" alt="Power BI Icon">
+      <h3>Power BI</h3>
+      <p>Create powerful, interactive dashboards and reports to turn raw data into insights.</p>
+    </div>
+    <div class="card-inner card-back">
+      <h3>Visualize 📈</h3>
+      <p>Build dashboards and share insights like a pro.</p>
+      <a href="/PowerBI">Learn More</a>
+    </div>
+  </div>
+
+  <!-- AI/ML -->
+  <div class="card">
+    <span class="badge upcoming">Coming Soon</span>
+    <div class="card-inner card-front">
+      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="AI/ML Icon">
+      <h3>AI / Machine Learning</h3>
+      <p>Explore algorithms and techniques that enable machines to learn and make decisions.</p>
+    </div>
+    <div class="card-inner card-back">
+      <h3>Stay Tuned 🤖</h3>
+      <p>Exciting ML & AI projects are on the way.</p>
+      <button disabled>Coming Soon</button>
+    </div>
+  </div>
+
+  <!-- Scraping with API -->
+  <div class="card">
+    <span class="badge new">New</span>
+    <div class="card-inner card-front">
+      <img src="https://cdn-icons-png.flaticon.com/512/306/306398.png" alt="API Icon">
+      <h3>Scraping with API</h3>
+      <p>Fetch data efficiently using APIs and process JSON responses with Python.</p>
+    </div>
+    <div class="card-inner card-back">
+      <h3>API Magic ✨</h3>
+      <p>Learn to connect, fetch, and handle API data step by step.</p>
+      <a href="/apiScraping">Learn More</a>
+    </div>
+  </div>
+</div>
+</main>
 
   <!-- Footer -->
   <footer>
@@ -260,12 +420,12 @@
       }
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      connect();
-      requestAnimationFrame(animate);
-    }
+    // function animate() {
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   particles.forEach(p => p.update());
+    //   connect();
+    //   requestAnimationFrame(animate);
+    // }
 
     animate();
 

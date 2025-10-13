@@ -73,20 +73,45 @@
     }
     h1 {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       color: #00f0ff;
       font-size: 36px;
       font-family: 'Orbitron', sans-serif;
       text-shadow: 0 0 15px rgba(0,240,255,0.7);
     }
 
+    /* Blogs Intro Section */
+    .blogs-intro {
+      max-width: 850px;
+      margin: 0 auto 40px;
+      padding: 20px 25px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0,240,255,0.3);
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,240,255,0.2);
+      color: #ccc;
+      font-size: 16px;
+      line-height: 1.7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .blogs-intro:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0,240,255,0.3), 0 0 20px rgba(255,0,128,0.2);
+    }
+    .blogs-intro p span {
+      color: #ff0080;
+      font-weight: 600;
+    }
+
     /* Blog Cards */
     .cards-container {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
     }
     .card {
+      position: relative;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(0,240,255,0.4);
       border-radius: 14px;
@@ -96,10 +121,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 260px; /* equal height cards */
+      min-height: 260px;
+      overflow: hidden;
     }
     .card:hover {
-      transform: translateY(-8px) scale(1.03);
+      transform: translateY(-6px) scale(1.03);
       box-shadow: 0 0 25px rgba(0,240,255,0.5), 0 0 35px rgba(255,0,128,0.4);
     }
     .card h2 {
@@ -137,6 +163,27 @@
       transform: scale(1.08);
       box-shadow: 0 0 20px rgba(0,240,255,0.9), 0 0 30px rgba(255,0,128,0.7);
     }
+    .card button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Badges */
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 6px rgba(0,240,255,0.6);
+    }
+    .badge.new { background: linear-gradient(135deg, #ff0080, #ff5f5f); }
+    .badge.upcoming { background: linear-gradient(135deg, #888, #555); }
 
     /* Footer */
     footer {
@@ -148,15 +195,11 @@
       color: #aaa;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
-    footer span {
-      color: #00f0ff;
-    }
+    footer span { color: #00f0ff; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .cards-container {
-        grid-template-columns: 1fr; /* 1 card per row on mobile */
-      }
+      .cards-container { grid-template-columns: 1fr; }
       h1 { font-size: 26px; }
       header nav { gap: 12px; font-size: 14px; }
     }
@@ -183,26 +226,38 @@
   <!-- Main -->
   <main>
     <h1>✨My Latest Blogs✨</h1>
+
+    <!-- Intro Section -->
+    <section class="blogs-intro">
+      <p>Welcome! Here you'll find my latest thoughts, tutorials, and insights on <span>Data Analytics, Python, Web Scraping</span>, and portfolio projects. Each blog is crafted to help beginners and enthusiasts explore modern analytics techniques step by step.</p>
+      <p style="color:#ff0080; font-weight:600; margin-top:5px;">🔔 Stay tuned — new blogs are added regularly!</p>
+    </section>
+
+    <!-- Blog Cards -->
     <div class="cards-container">
       <div class="card">
+        <span class="badge">Updated</span>
         <h2>From Numbers to Knowledge: The Role of Data Analytics....</h2>
         <p>We hear a lot about Data Analytics these days. But what does it really mean?...</p>
         <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd1','_blank')">Read More</button>
       </div>
       <div class="card">
+        <span class="badge new">New</span>
         <h2>Unlocking the Power of Data: The Domain of Data Analytics</h2>
-        <p>In today's digital world, Data Analytics isn’t just a buzzword — it’s a necessity. From finance to healthcare, marketing to logistics, data-driven decisions are reshaping how businesses operate and grow....</p>
+        <p>In today's digital world, Data Analytics isn’t just a buzzword — it’s a necessity...</p>
         <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98fd6','_blank')">Read More</button>
       </div>
       <div class="card">
+        <span class="badge">Updated</span>
         <h2>Lessons I Learned in My First Month of Data Analytics Training</h2>
         <p>I always thought analysis meant cool charts and dashboards....</p>
         <button onclick="window.open('https://skillyatra.codroidhub.com/blogs/687dee0770d5a281cbd98f91','_blank')">Read More</button>
       </div>
       <div class="card">
+        <span class="badge upcoming">Coming Soon</span>
         <h2>📊 Building My Data Analytics Portfolio with Flask</h2>
-        <p>I wanted a platform where I could display my data analytics projects interactively—from web scraping and data cleaning to visualizations and dashboards—all in one place....</p>
-        <button disabled style="opacity:0.6; cursor:not-allowed;">Coming Soon</button>
+        <p>I wanted a platform where I could display my data analytics projects interactively....</p>
+        <button disabled>Coming Soon</button>
       </div>
     </div>
   </main>

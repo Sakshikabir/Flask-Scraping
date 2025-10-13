@@ -31,8 +31,12 @@
     }
     .notebookContainer{
       width: 100%;
-      min-height: 800px;
+      min-height: 600px;
+      border: none;
       height: 100%;
+    }
+    @media (max-width: 768px) {
+      .notebookContainer { min-height: 400px; }
     }
     .header {
       display: flex;
@@ -64,6 +68,10 @@
     .nav a:hover {
       color: var(--accent-violet);
     }
+    .nav a.active {
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
     .hero {
       text-align: center;
       padding: 4rem 2rem 2rem;
@@ -90,7 +98,7 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 3rem 0 1rem;
-      display: flex;
+      display: none;
       flex-wrap: wrap;
       gap: 2.5rem;
       justify-content: space-around;
@@ -165,10 +173,18 @@
 </head>
 
 <body>
+  <!-- Particle Background -->
+  <canvas id="bg"></canvas>
+
+  <header class="header">
+    ...
+  </header>
+
+  
   <header class="header">
     <div class="logo"><i data-feather="activity"></i>&nbsp;Stock Insight</div>
     <nav class="nav">
-      <a href="#overview">Overview</a>
+      <a href="#overview" class="active">Overview</a>
       <a href="#fetch">Fetch Data</a>
       <a href="#compare">Compare</a>
       <a href="#realtime">Real-Time</a>
@@ -184,7 +200,7 @@
     </p>
   </section>
 
-  <section class="features-section" id="fetch" style="display :none">
+  <section class="features-section" id="fetch">
     <div class="feature-card">
       <div class="feature-icon"><i data-feather="download"></i></div>
       <div class="feature-title">Quick Data Pull</div>
@@ -218,7 +234,7 @@ plt.legend(); plt.show()
     </div>
   </section>
 
-  <section class="features-section" id="compare" style="display :none">
+  <section class="features-section" id="compare">
     <div class="feature-card">
       <div class="feature-icon"><i data-feather="layers"></i></div>
       <div class="feature-title">Cross-Symbol Comparison</div>
@@ -231,7 +247,7 @@ multi.plot(figsize=(14,6)); plt.show()
     </div>
   </section>
 
-  <section class="features-section" id="realtime" style="display :none">
+  <section class="features-section" id="realtime">
     <div class="feature-card">
       <div class="feature-icon"><i data-feather="clock"></i></div>
       <div class="feature-title">Live Price Tracking</div>
@@ -247,7 +263,7 @@ while True:
     </div>
   </section>
 
-  <section class="features-section" id="export" style="display :none">
+  <section class="features-section" id="export">
     <div class="feature-card">
       <div class="feature-icon"><i data-feather="save"></i></div>
       <div class="feature-title">Export Results</div>
@@ -258,20 +274,50 @@ multi.to_excel("multi_stock.xlsx")
       </pre>
     </div>
   </section>
-  <iframe src ="/static/notebooks/_Time_Series.html" class="notebookContainer">
 
-  </iframe>
+  <iframe src="/static/notebooks/_Time_Series.html" class="notebookContainer"></iframe>
+  <iframe src="/static/notebooks/Time_series_2,3.html" class="notebookContainer"></iframe>
+  
   <section class="tech-stack">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/python.svg" class="tech-logo" alt="Python">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/pandas.svg" class="tech-logo" alt="Pandas">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/yfinance.svg" class="tech-logo" alt="yfinance">
-    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/matplotlib.svg" class="tech-logo" alt="Matplotlib">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/python.svg" class="tech-logo" alt="Python Programming Language">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/pandas.svg" class="tech-logo" alt="Pandas Library">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/yfinance.svg" class="tech-logo" alt="yFinance API">
+    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v8/icons/matplotlib.svg" class="tech-logo" alt="Matplotlib Visualization">
   </section>
 
   <div class="footer">
     © 2025 Stock Insight Studio &middot; Powered by <span style="color:var(--accent-violet);font-weight:600;">Python</span>
   </div>
 
-  <script>feather.replace()</script>
+  <script>
+    feather.replace();
+
+    // Handle nav clicks
+    const navLinks = document.querySelectorAll('.nav a');
+    const sections = document.querySelectorAll('.features-section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+
+        // Remove active from all links
+        navLinks.forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+
+        // Hide all feature sections
+        sections.forEach(sec => sec.style.display = "none");
+
+        // Show only target section (if not overview)
+        if (targetId !== "overview") {
+          const target = document.getElementById(targetId);
+          if (target) target.style.display = "flex";
+          target.scrollIntoView({ behavior: "smooth" });
+        } else {
+          document.getElementById("overview").scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
       --card-border: rgba(0,240,255,0.20);
       --shadow-1: 0 8px 28px rgba(0,0,0,.6);
       --shadow-2: 0 14px 40px rgba(0,0,0,.55);
-      --ok: #31d0aa;
+      --ok: #31d0aa;  
       --warn: #ffb14e;
       --err: #ff6d7a;
     }
@@ -522,6 +522,21 @@
     <div class="container">
       <h2 class="fade-up">Projects</h2>
       <div class="projects-grid">
+
+
+        <div class="project-card fade-up" data-tilt>
+          <img src="https://cdn-icons-png.flaticon.com/512/1829/1829588.png" alt="Visualization Icon" loading="lazy">
+          <h3>📊 Scraping & Data Visualization with URL</h3>
+          <p>Beautiful insights with Matplotlib &amp; Seaborn, turning raw data into meaningful stories.</p>
+          <div class="stack-row">
+            <span class="stack-badge">Matplotlib</span>
+            <span class="stack-badge">Seaborn</span>
+            <span class="stack-badge">Python</span>
+          </div>
+          <!-- keep your original route -->
+          <a href="/scraping" class="btn">View Project</a>
+        </div>
+
         <div class="project-card fade-up" data-tilt>
           <img src="https://cdn-icons-png.flaticon.com/512/888/888879.png" alt="Power BI Icon" loading="lazy">
           <h3>🚀 Power BI Dashboards</h3>
@@ -561,18 +576,21 @@
           <a href="/" class="btn">View Project</a>
         </div>
 
+
+        <!-- New Project Card: Scraping with API -->
         <div class="project-card fade-up" data-tilt>
-          <img src="https://cdn-icons-png.flaticon.com/512/1829/1829588.png" alt="Visualization Icon" loading="lazy">
-          <h3>📊 Data Visualization</h3>
-          <p>Beautiful insights with Matplotlib &amp; Seaborn, turning raw data into meaningful stories.</p>
+          <img src="https://cdn-icons-png.flaticon.com/512/4012/4012108.png" alt="API Scraping Icon" loading="lazy">
+          <h3>🕸️ Scraping with API</h3>
+          <p>Automated data collection from APIs, handling JSON responses, and storing structured datasets efficiently.</p>
           <div class="stack-row">
-            <span class="stack-badge">Matplotlib</span>
-            <span class="stack-badge">Seaborn</span>
             <span class="stack-badge">Python</span>
+            <span class="stack-badge">Requests</span>
+            <span class="stack-badge">JSON</span>
+            <span class="stack-badge">Pandas</span>
           </div>
-          <!-- keep your original route -->
-          <a href="/scraping" class="btn">View Project</a>
-        </div>
+          <a href="/api-scraping" class="btn">View Project</a>
+      </div>
+      
       </div>
     </div>
   </section>
@@ -685,11 +703,11 @@
         }
       }
     }
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update()); connect(); requestAnimationFrame(animate);
-    }
-    animate();
+    // function animate() {
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   particles.forEach(p => p.update()); connect(); requestAnimationFrame(animate);
+    // }
+    // animate();
 
     /* ===== Intersection Reveal ===== */
     const revealEls = document.querySelectorAll('.fade-up');

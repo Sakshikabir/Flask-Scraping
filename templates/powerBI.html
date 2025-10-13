@@ -76,41 +76,106 @@
       font-size: 38px;
       font-family: 'Orbitron', sans-serif;
       color: #00f0ff;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       text-shadow: 0 0 15px rgba(0,240,255,0.8);
     }
 
-    /* Cards */
+    /* Page Info */
+    .page-info {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      border-radius: 12px;
+      padding: 25px 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .page-info:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), 0 0 35px rgba(255,0,128,0.3);
+    }
+    .page-info h2 {
+      color: #00f0ff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px rgba(0,240,255,0.7);
+    }
+    .page-info p {
+      color: #ccc;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    /* Cards Container */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
+      perspective: 1000px;
     }
+
+    /* Flip Card */
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,240,255,0.4);
-      border-radius: 14px;
-      padding: 25px;
-      box-shadow: 0 0 15px rgba(0,240,255,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      width: 100%;
+      height: 280px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
     }
     .card:hover {
-      transform: translateY(-8px) scale(1.05);
-      box-shadow: 0 0 25px rgba(0,240,255,0.6), 0 0 35px rgba(255,0,128,0.4);
+      transform: rotateY(180deg);
     }
-    .card h2 {
+    .card-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,240,255,0.3);
+      backface-visibility: hidden;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .card-front h3, .card-back h3 {
       color: #00f0ff;
-      margin-bottom: 12px;
       font-family: 'Orbitron', sans-serif;
-      font-size: 20px;
-      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+      margin-bottom: 10px;
     }
-    .card p {
-      font-size: 14px;
+    .card-front p, .card-back p {
       color: #ccc;
+      font-size: 14px;
       line-height: 1.6;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    /* Badge */
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 0 6px rgba(0,240,255,0.6);
+      z-index: 2;
+    }
+    .badge.new { background: linear-gradient(135deg, #ff0080, #ff5f5f); }
+
+    /* Button */
     .button {
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       color: #fff;
@@ -136,14 +201,13 @@
       color: #aaa;
       border-top: 1px solid rgba(255,255,255,0.1);
     }
-    footer span {
-      color: #00f0ff;
-    }
+    footer span { color: #00f0ff; }
 
     /* Responsive */
     @media (max-width: 600px) {
       h1 { font-size: 28px; }
       header nav { gap: 12px; font-size: 14px; }
+      .page-info h2 { font-size: 20px; }
     }
   </style>
 </head>
@@ -152,7 +216,7 @@
   <canvas id="bg"></canvas>
 
   <header>
-    <div class="logo">CodroidHub</div>
+    <div class="logo">Sakshi Kabir</div>
     <nav>
       <a href="/">Home</a>
       <a href="/aboutMe">About Me</a>
@@ -165,37 +229,72 @@
 
   <main>
     <h1>🚀 Interactive Dashboards</h1>
+
+    <!-- Info Section -->
+    <section class="page-info">
+      <h2>📊 Explore Interactive Dashboards</h2>
+      <p>Discover visually appealing, interactive Power BI dashboards designed to analyze business, HR, COVID-19, Netflix, and e-commerce datasets. Each dashboard is crafted to help you gain insights quickly and make data-driven decisions.</p>
+    </section>
+
     <div class="cards">
-      <!-- <div class="card">
-        <h2>Sample Superstore</h2>
-        <p>Retail sales data including orders, profit, category, and region for business analysis and KPIs.</p>
-        <a class="button" href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final" target="_blank">Read More</a>
-      </div> -->
+      <!-- HR Analytics -->
       <div class="card">
-        <h2>HR  Analytics</h2>
-        <p>Employee and sales performance data for tracking productivity, revenue, and workforce trends.</p>
-        <a class="button" href="/HR">Read More</a>
+        <span class="badge">Updated</span>
+        <div class="card-inner card-front">
+          <h3>HR Analytics</h3>
+          <p>Employee and sales performance data for tracking productivity, revenue, and workforce trends.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Details 📊</h3>
+          <p>Interactive HR dashboards with metrics and visualizations for analysis.</p>
+          <a class="button" href="/HR">Read More</a>
+        </div>
       </div>
+
+      <!-- COVID-19 Survey -->
       <div class="card">
-        <h2>Covid-19 Survey</h2>
-        <p>This COVID-19 dataset provides valuable insights into the spread, impact, and patterns of the pandemic across different regions..</p>
-        <a class="button" href="/Covid" target="_blank">Read More</a>
+        <span class="badge new">New</span>
+        <div class="card-inner card-front">
+          <h3>Covid-19 Survey</h3>
+          <p>Insights into the spread, impact, and patterns of COVID-19 across regions.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Details 🦠</h3>
+          <p>Power BI dashboards tracking COVID-19 trends and statistics.</p>
+          <a class="button" href="/Covid">Read More</a>
+        </div>
       </div>
+
+      <!-- Netflix Data -->
       <div class="card">
-        <h2>Netflix Data</h2>
-        <p>Business financials including revenue, expenses, and profit margins for fiscal reporting and forecasting.</p>
-        <a class="button" href="/netflix" target="_blank">Read More</a>
+        <div class="card-inner card-front">
+          <h3>Netflix Data</h3>
+          <p>Business financials including revenue, expenses, and profit margins.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Details 🎬</h3>
+          <p>Explore interactive dashboards analyzing Netflix data trends.</p>
+          <a class="button" href="/netflix">Read More</a>
+        </div>
       </div>
+
+      <!-- E-commerce Sales -->
       <div class="card">
-        <h2>E-commerce Sales Data</h2>
-        <p>Online retail transaction data including customer behavior, products, and purchase patterns.</p>
-        <a class="button" href="https://www.kaggle.com/datasets/carrie1/ecommerce-data" target="_blank">Read More</a>
+        <div class="card-inner card-front">
+          <h3>E-commerce Sales Data</h3>
+          <p>Online retail data including customer behavior and purchase patterns.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Details 🛒</h3>
+          <p>Interactive dashboards visualizing e-commerce sales and insights.</p>
+          <a class="button" href="https://www.kaggle.com/datasets/carrie1/ecommerce-data">Read More</a>
+        </div>
       </div>
     </div>
   </main>
 
   <footer>
-    © 2025 <span>Sakshi kabir</span> | Futuristic Dashboards ✨
+    © 2025 <span>Sakshi Kabir</span> | Futuristic Dashboards ✨
   </footer>
 
   <!-- Background Animation -->
@@ -253,13 +352,13 @@
       }
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      connect();
-      requestAnimationFrame(animate);
-    }
-    animate();
+    // function animate() {
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   particles.forEach(p => p.update());
+    //   connect();
+    //   requestAnimationFrame(animate);
+    // }
+    // animate();
 
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;

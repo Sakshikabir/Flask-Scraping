@@ -62,7 +62,6 @@
       color: #ff0080;
     }
 
-
     /* Main */
     main {
       flex: 1;
@@ -74,102 +73,150 @@
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 38px;
-      margin-bottom: 50px;
+      margin-bottom: 25px;
       color: #00f0ff;
       text-shadow: 0 0 8px rgba(0,240,255,0.6);
+    }
+
+    /* Intro Text */
+    .intro {
+      max-width: 750px;
+      margin: 0 auto 40px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+    /* Extra Info Section */
+    .explore-info {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 50px;
+      text-align: left;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .explore-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: #00f0ff;
+      text-shadow: 0 0 6px rgba(0,240,255,0.6);
+    }
+    .explore-info ul {
+      margin: 15px 0;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    .explore-info li {
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #ddd;
+    }
+    .explore-info p {
+      font-size: 15px;
+      color: #bbb;
+      line-height: 1.6;
+      margin-top: 10px;
     }
 
     /* Cards */
     .cards-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 30px;
       width: 100%;
-      justify-items: center;
+      perspective: 1000px;
     }
-
-    @media (max-width: 1024px) {
-      .cards-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cards-container {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 35px 25px;
+      position: relative;
+      width: 100%;
+      height: 320px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s ease;
+    }
+    .card:hover {
+      transform: rotateY(180deg);
+    }
+    .card-inner {
+      position: absolute;
+      width: 100%;
+      height: 100%;
       border-radius: 16px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backface-visibility: hidden;
+      padding: 25px;
       text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease;
-      max-width: 300px;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s forwards;
     }
 
-    .card:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(0,240,255,0.6);
-    }
-
-    .card img {
-      width: 90px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0 0 10px rgba(0,240,255,0.7));
-      transition: transform 0.3s ease;
-    }
-    .card:hover img { transform: scale(1.1); }
-
-    .card h3 {
-      font-size: 22px;
+    /* Front */
+    .card-front img {
+      width: 80px;
       margin-bottom: 15px;
+      filter: drop-shadow(0 0 10px rgba(0,240,255,0.7));
+    }
+    .card-front h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
       color: #00f0ff;
       font-family: 'Orbitron', sans-serif;
     }
-
-    .card p {
-      font-size: 15px;
+    .card-front p {
+      font-size: 14px;
       color: #ddd;
-      margin-bottom: 22px;
       line-height: 1.6;
     }
 
-    .card a {
+    /* Back */
+    .card-back {
+      transform: rotateY(180deg);
+      background: rgba(0, 240, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-back a, .card-back button {
+      margin-top: 15px;
       text-decoration: none;
       color: #fff;
       background: linear-gradient(135deg, #00f0ff, #ff0080);
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: 600;
-      display: inline-block;
+      border: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
-    .card a:hover {
+    .card-back a:hover, .card-back button:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 14px rgba(0,240,255,0.6);
     }
-
-    .card:nth-child(1) { animation-delay: 0.1s; }
-    .card:nth-child(2) { animation-delay: 0.2s; }
-    .card:nth-child(3) { animation-delay: 0.3s; }
-    .card:nth-child(4) { animation-delay: 0.4s; }
-    .card:nth-child(5) { animation-delay: 0.5s; }
-    .card:nth-child(6) { animation-delay: 0.6s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .card-back button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
+
+    /* Badge Labels */
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #00f0ff, #0077ff);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 6px rgba(0,240,255,0.6);
+      z-index: 2;
+    }
+    .badge.new { background: linear-gradient(135deg, #ff0080, #ff5f5f); }
+    .badge.upcoming { background: linear-gradient(135deg, #888, #555); }
 
     /* Footer */
     footer {
@@ -184,8 +231,10 @@
 
     /* Responsive */
     @media (max-width: 600px) {
-      h1 { font-size: 28px; margin-bottom: 30px; }
+      h1 { font-size: 28px; margin-bottom: 20px; }
       header nav { gap: 12px; font-size: 14px; }
+      .intro { font-size: 15px; margin-bottom: 30px; }
+      .card { height: 280px; }
     }
   </style>
 </head>
@@ -206,51 +255,112 @@
     </nav>
   </header>
 
-  <!-- Scraping Cards -->
+  <!-- Intro & Info -->
   <main>
     <h1>Web Scraping Projects</h1>
+    <p class="intro">
+      Explore hands-on web scraping projects. Learn to collect data from websites, parse it with Python libraries like BeautifulSoup and Scrapy, and analyze it for meaningful insights.
+    </p>
+
+    <section class="explore-info">
+      <h2>What You’ll Learn 🛠️</h2>
+      <ul>
+        <li>🔍 Web scraping with Python (BeautifulSoup & Scrapy)</li>
+        <li>📊 Extracting, cleaning, and analyzing data</li>
+        <li>💻 Automating repetitive data collection tasks</li>
+        <li>📈 Hands-on projects with real websites</li>
+      </ul>
+      <p>This page is updated regularly with new scraping projects and tutorials to level up your data collection skills.</p>
+    </section>
+
+    <!-- Cards -->
     <div class="cards-container">
+      <!-- Book Scraper -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Books Icon">
-        <h3>Book Scraper</h3>
-        <p>Learn how to parse book details using Python’s BeautifulSoup library.</p>
-        <a href="/scrape">Learn More</a>
+        <span class="badge">Updated</span>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/270/270798.png" alt="Books Icon">
+          <h3>Book Scraper</h3>
+          <p>Learn how to parse book details using Python’s BeautifulSoup library.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Get Started 📚</h3>
+          <p>Step-by-step guide with Python & BeautifulSoup.</p>
+          <a href="/scrape">Learn More</a>
+        </div>
       </div>
 
+      <!-- Laptop Scraper -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="Laptop Icon" />
-        <h3>Laptop Scraper</h3>
-        <p>Scrape Flipkart laptop details with Scrapy framework for structured crawling.</p>
-        <a href="/scrape_flipkart">Learn More</a>
+        <span class="badge new">New</span>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="Laptop Icon" />
+          <h3>Laptop Scraper</h3>
+          <p>Scrape Flipkart laptop details with Scrapy framework for structured crawling.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Scrapy Power 💻</h3>
+          <p>Hands-on Scrapy project with Flipkart laptops.</p>
+          <a href="/scrape_flipkart">Learn More</a>
+        </div>
       </div>
 
+      <!-- Goodreads Quotes Scraper -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1998/1998592.png" alt="Quotes Icon">
-        <h3>Goodreads Quotes Scraper</h3>
-        <p>Scrape motivational quotes and analyze authors from Goodreads with Flask.</p>
-        <a href="/scrape_goodreads">Learn More</a>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/1998/1998592.png" alt="Quotes Icon">
+          <h3>Goodreads Quotes</h3>
+          <p>Scrape motivational quotes and analyze authors from Goodreads with Flask.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Analyze Quotes ✨</h3>
+          <p>Flask app to explore quotes and authors.</p>
+          <a href="/scrape_goodreads">Learn More</a>
+        </div>
       </div>
 
+      <!-- Top Womens Top -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Finance Icon" />
-        <h3> Top Womens Top - Flipkart</h3>
-        <p>Scrape the top womens tops.</p>
-        <a href="/scrape_tops">Learn More</a>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Fashion Icon" />
+          <h3>Top Womens Top</h3>
+          <p>Scrape the top womens tops from Flipkart.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Fashion Data 👗</h3>
+          <p>Learn scraping and data extraction.</p>
+          <a href="/scrape_tops">Learn More</a>
+        </div>
       </div>
 
+      <!-- Weather Scraper -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" alt="Weather Icon" />
-        <h3>Weather Scraper</h3>
-        <p>Scrape live weather updates and forecasts from popular weather websites.</p>
-        <a href="/scrape_weather">Learn More</a>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/1116/1116453.png" alt="Weather Icon" />
+          <h3>Weather Scraper</h3>
+          <p>Scrape live weather updates and forecasts from popular weather websites.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Weather Insights ☁️</h3>
+          <p>Python scraping with live weather data.</p>
+          <a href="/scrape_weather">Learn More</a>
+        </div>
       </div>
 
+      <!-- Movie Scraper -->
       <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3468/3468327.png" alt="Movie Icon" />
-        <h3>Movie Scraper</h3>
-        <p>Scrape movie ratings, genres, and release dates from IMDb for analysis.</p>
-        <a href="/scrape_movies">Learn More</a>
+        <div class="card-inner card-front">
+          <img src="https://cdn-icons-png.flaticon.com/512/3468/3468327.png" alt="Movie Icon" />
+          <h3>Movie Scraper</h3>
+          <p>Scrape movie ratings, genres, and release dates from IMDb for analysis.</p>
+        </div>
+        <div class="card-inner card-back">
+          <h3>Movie Data 🎬</h3>
+          <p>Analyze IMDb data with Python.</p>
+          <a href="/scrape_movies">Learn More</a>
+        </div>
       </div>
+
     </div>
   </main>
 
@@ -314,15 +424,14 @@
       }
     }
 
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      connect();
-      requestAnimationFrame(animate);
-    }
+    // function animate() {
+    //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //   particles.forEach(p => p.update());
+    //   connect();
+    //   requestAnimationFrame(animate);
+    // }
 
     animate();
-
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
